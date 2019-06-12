@@ -80,27 +80,27 @@ mvm clean install
 ### Configuration
 * At the top right corner of the IDE, click **Add Configuration**.
 
-![Configuration](images/cfg.PNG)
+![Configuration](instructions/images/cfg.PNG)
 
 * Click the **Plus (+)** and choose **Tomcat Server** > **Local**
 
-![Add New Configuration](images/add_cfg.png)
+![Add New Configuration](instructions/images/add_cfg.png)
 
 * Click **Configure...**
 
-![Configure...](images/cfg_main.PNG)
+![Configure...](instructions/images/cfg_main.PNG)
 
 * Set **Tomcat Home** to your extracted tomcat directory then click **OK**.
 
-![Set directory](images/set_dir.PNG)
+![Set directory](instructions/images/set_dir.PNG)
 
 * Choose **Deployment** tab then click the **Plus (+)** and choose the **mgm-experiences:war**.
 
-![Deployment](images/set_artifact.PNG)
+![Deployment](instructions/images/set_artifact.PNG)
 
 * Set **Application context** to decide the pathing of the URL. For example, here we set **'/'** which means ROOT. 
 
-![App context](images/set_context.PNG)
+![App context](instructions/images/set_context.PNG)
 
 * Adjust any other options as you see fit.
 
@@ -108,7 +108,7 @@ mvm clean install
 
 ### Run/Debug
 
-![Tools](images/corner.PNG)
+![Tools](instructions/images/corner.PNG)
 
 Make sure the drop-down list has been set correctly to the configuration you just created.
 
