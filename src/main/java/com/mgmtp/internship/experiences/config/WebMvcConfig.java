@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -60,6 +62,20 @@ public class WebMvcConfig implements WebMvcConfigurer {
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;
+    }
+
+    @Bean
+    public HttpComponentsClientHttpRequestFactory httpRequestFactory(){
+        HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
+        httpRequestFactory.setConnectionRequestTimeout(15000);
+        httpRequestFactory.setConnectTimeout(15000);
+        httpRequestFactory.setReadTimeout(15000);
+        return httpRequestFactory ;
+    }
+    @Bean
+    public RestTemplate restTemplate(){
+        RestTemplate restTemplate = new RestTemplate(httpRequestFactory());
+        return restTemplate;
     }
 
     @Override
