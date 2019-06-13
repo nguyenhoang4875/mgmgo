@@ -9,6 +9,7 @@ classes/
 .classpath
 .project
 spring-*/src/main/java/META-INF/MANIFEST.MF
+/src/main/java/com/mgmtp/internship/experiences/model/tables/
 
 # IDEA artifacts and output dirs
 *.iml
