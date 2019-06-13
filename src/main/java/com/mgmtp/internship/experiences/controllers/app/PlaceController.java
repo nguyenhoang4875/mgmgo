@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/place")
 public class PlaceController {
 
     @Autowired
     private PlaceService placeService;
 
     @GetMapping()
-    public String home(Model model){
+    public String home(Model model) {
         model.addAttribute("placeForm", placeService.findById(1));
 
-        return "home";
+        return "index";
     }
 }

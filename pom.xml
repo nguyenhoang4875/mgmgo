@@ -20,6 +20,10 @@
         <spring-framework>5.1.6.RELEASE</spring-framework>
         <spring-jdbc>5.0.6.RELEASE</spring-jdbc>
         <jooq.version>3.11.11</jooq.version>
+        <thymeleaf-version>3.0.9.RELEASE</thymeleaf-version>
+        <thymeleaf-layout-version>2.3.0</thymeleaf-layout-version>
+        <bootstrap-version>4.0.0</bootstrap-version>
+        <jquery-version>3.1.1</jquery-version>
     </properties>
 
     <profiles>
@@ -69,10 +73,31 @@
         <!--Thymleaf-->
         <dependency>
             <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
-            <version>3.0.9.RELEASE</version>
+            <version>${thymeleaf-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>${thymeleaf-layout-version}</version>
         </dependency>
 
+<!--         Bootstrap & jquery-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${jquery-version}</version>
+        </dependency>
 
         <!--JSON-->
         <dependency>

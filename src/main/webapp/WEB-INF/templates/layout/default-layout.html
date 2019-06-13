@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head>
+        <th:block th:replace="fragments/head"></th:block>
+        <title layout:title-pattern="$CONTENT_TITLE">mgm go</title>
+    </head>
+
+    <body>
+        <!-- Header, navbar,...-->
+        <div th:replace="fragments/header :: header">This header content is going to be replaced.</div>
+
+        <!-- main content -->
+        <div layout:fragment="main-content" class="wrapper"></div>
+
+        <!-- footer -->
+        <footer th:replace="fragments/footer :: footer" class="footer"></footer>
+
+
+        <!-- default script (bootstrap, jquery) -->
+        <th:block th:replace="fragments/script"></th:block>
+
+        <!-- your custom script -->
+        <th:block layout:fragment="custom-script"></th:block>
+    </body>
+
+</html>
