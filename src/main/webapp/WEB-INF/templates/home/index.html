@@ -11,11 +11,18 @@
 <body>
 
 <div layout:fragment="main-content">
-    <h1>Hello world</h1>
+    <div class="jumbotron mb-0">
+        <h1 class="display-4">Hello, world!</h1>
+        <p class="lead">Welcome come to mgm go.</p>
+        <hr class="my-4">
+        <p>You can find events, places and anything in here.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
 </div>
 
 <th:block layout:fragment="custom-script">
     <script src="/static/js/index.js"></script>
+    <script src="/static/js/api/getQuote.js"></script>
 </th:block>
 </body>
 </html>

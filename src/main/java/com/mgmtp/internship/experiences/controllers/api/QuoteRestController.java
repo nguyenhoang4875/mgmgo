@@ -3,7 +3,6 @@ package com.mgmtp.internship.experiences.controllers.api;
 import com.mgmtp.internship.experiences.dto.QuoteDTO;
 import com.mgmtp.internship.experiences.exceptions.ApiException;
 import com.mgmtp.internship.experiences.services.QuoteService;
-import com.sun.tools.javac.util.DefinedBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,21 +23,16 @@ public class QuoteRestController extends BaseRestController {
     private QuoteService quoteService;
 
     @GetMapping
-    public QuoteDTO getQuote()
-    {
-        try{
+    public QuoteDTO getQuote() {
+        try {
             QuoteDTO result = quoteService.getQuote();
-            if(result == null){
+            if (result == null) {
                 throw new ApiException(HttpStatus.NOT_FOUND, "Cannot found quote.");
             }
-
             return result;
-        }
-        catch (ApiException api){
+        } catch (ApiException api) {
             throw api;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new ApiException(HttpStatus.REQUEST_TIMEOUT, "External API error.");
         }
     }
