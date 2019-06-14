@@ -6,7 +6,8 @@ $(document).ready(function () {
         .then(function (quote) {
             console.log(quote)
             $('#quote-content').html(quote.content);
-            $('#quote-author').text("- "+quote.title);
+            $('#quote-author').text(quote.title || "Bruce Lee");
+
             $('.quote-wrapper').removeClass('invisible');
         })
         .catch(function (error) {
