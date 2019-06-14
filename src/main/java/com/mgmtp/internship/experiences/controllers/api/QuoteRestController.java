@@ -23,21 +23,16 @@ public class QuoteRestController extends BaseRestController {
     private QuoteService quoteService;
 
     @GetMapping
-    public QuoteDTO getQuote()
-    {
-        try{
+    public QuoteDTO getQuote() {
+        try {
             QuoteDTO result = quoteService.getQuote();
-            if(result == null){
+            if (result == null) {
                 throw new ApiException(HttpStatus.NOT_FOUND, "Cannot found quote.");
             }
-
             return result;
-        }
-        catch (ApiException api){
+        } catch (ApiException api) {
             throw api;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new ApiException(HttpStatus.REQUEST_TIMEOUT, "External API error.");
         }
     }

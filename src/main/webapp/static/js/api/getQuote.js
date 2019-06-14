@@ -6,7 +6,7 @@ $(document).ready(function () {
         .then(function (quote) {
             console.log(quote)
             $('#quote-content').html(quote.content);
-            $('#quote-author').text(quote.title);
+            $('#quote-author').text("- "+quote.title);
             $('.quote-wrapper').removeClass('invisible');
         })
         .catch(function (error) {
