@@ -1,22 +1,28 @@
-<header xmlns:th="www.thymeLeaf.org" th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-light menu_box_shadow fixed-top bg-white">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand logo_h" href="/">
-                <img src="/static/images/mgm-go-logo.png" class="logo_img" alt="mgm-go">
-            </a>
-            <button class="navbar-toggler border-0 btn-toggle" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-<!--                <span class="navbar-toggler-icon"></span>-->
-                <i class="fa fa-bars text-primary"></i>
-            </button>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                <ul class="nav navbar-nav menu_nav ml-auto">
-<!--                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>-->
-                    <!-- insert you item here -->
-                </ul>
+<div xmlns:th="www.thymeLeaf.org" th:fragment="header">
+    <header id="header_area">
+        <nav class="navbar navbar-expand-lg navbar-light menu_box_shadow">
+            <div class="container-fluid col-12 col-lg-7">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand logo_h" href="/"><img src="/static/images/mgm-go-logo.png" class="logo_img" alt="mgm-go"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    </ul>
+
+                    <a th:if="${session.user==null || session.user.userName==null}" class="nav-link" th:href="@{/login}" th:text="Login"></a>
+                    <div class="dropdown" th:if="${session.user!=null && session.user.userName!=null}">
+                        <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown" th:text="${session.user.userName}"></a>
+                        <div class="dropdown-menu" aria-labelledby="user_dropdown">
+                            <a th:href="@{/logout}" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
+</div>
