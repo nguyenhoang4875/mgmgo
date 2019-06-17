@@ -74,6 +74,26 @@ body {
     color: #333!important;
     background:none!important;
 
+#header_area{
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.navbar a {
+    text-decoration: none !important;
+    color: #666666!important;
+    font-weight: 500;
+    outline: none;
+}
+.navbar a:hover {
+    cursor: pointer;
+    color: #333!important;
+    background: none!important;
+}
+
+.navbar a:active {
+    color: #333!important;
+    background:none!important;
+}
 
 .text-primary {
     color: #1d76bb !important;
