@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    getQuote();
+});
+
+function getQuote() {
     fetch('/api/quote')
         .then(function (response) {
             return response.json();
@@ -13,4 +17,4 @@ $(document).ready(function () {
         .catch(function (error) {
             $('.quote-wrapper').removeClass('invisible');
         })
-});
+}
