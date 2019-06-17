@@ -1,4 +1,5 @@
-<div xmlns:th="www.thymeLeaf.org" th:fragment="header">
+<div xmlns:th="www.thymeLeaf.org" th:fragment="header"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <header id="header_area">
         <nav class="navbar navbar-expand-lg navbar-light menu_box_shadow">
             <div class="container-fluid col-12 col-lg-7">
@@ -13,9 +14,9 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                     </ul>
 
-                    <a th:if="${session.user==null || session.user.userName==null}" class="nav-link" th:href="@{/login}" th:text="Login"></a>
-                    <div class="dropdown" th:if="${session.user!=null && session.user.userName!=null}">
-                        <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown" th:text="${session.user.userName}"></a>
+                    <a class="nav-link" th:href="@{/login}" th:text="Login" sec:authorize="!isAuthenticated()"></a>
+                    <div class="dropdown" sec:authorize="isAuthenticated()">
+                        <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown" sec:authentication="name"> </a>
                         <div class="dropdown-menu" aria-labelledby="user_dropdown">
                             <a th:href="@{/logout}" class="dropdown-item">Logout</a>
                         </div>

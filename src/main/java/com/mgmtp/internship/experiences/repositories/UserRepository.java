@@ -1,9 +1,12 @@
 package com.mgmtp.internship.experiences.repositories;
 
-import static com.mgmtp.internship.experiences.model.tables.tables.User.USER;
+import com.mgmtp.internship.experiences.model.tables.tables.records.UserRecord;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import static com.mgmtp.internship.experiences.model.tables.tables.User.USER;
 
 /**
  * userRepository for login
@@ -12,14 +15,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserRepository {
+
     @Autowired
     private DSLContext dslContext;
 
-    public boolean validateUser(String username, String password){
-        return  dslContext.selectFrom(USER)
-                .where(USER.USERNAME.eq(username))
-                .and(USER.PASSWORD.eq(password))
-                .fetchOne(0, boolean.class);
+    public UserRecord findUserByUsername(String userName) {
+        return dslContext.selectFrom(USER)
+                .where(USER.USERNAME.eq(userName)).fetchOne();
     }
 }
 

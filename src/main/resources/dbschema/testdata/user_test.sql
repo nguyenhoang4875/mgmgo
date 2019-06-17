@@ -39,6 +39,3 @@ VALUES ('ntran','ba2170d899750cf91f54f5513d19a70b');
 
 INSERT INTO public.user (username, password)
 VALUES ('sfrank','491f7f464be6ebdff0e48d2e1ec27f6b');
-
-
-
