@@ -5,6 +5,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="R1.0/create_place_table.xml" relativeToChangelogFile="true"/>
+    <include file="R1.0/create_category_table.xml" relativeToChangelogFile="true"/>
+    <include file="R1.0/create_activity_table.xml" relativeToChangelogFile="true"/>
+    <include file="R1.0/create_user_table.xml" relativeToChangelogFile="true"/>
+
 
 </databaseChangeLog>
