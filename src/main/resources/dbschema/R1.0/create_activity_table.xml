@@ -5,13 +5,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    <changeSet id="create_place_table" author="ntran">
-        <createTable tableName="place" remarks="place table">
+    <changeSet id="create_activity_table" author="vhduong">
+        <createTable tableName="activity" remarks="activity table">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false" />
             </column>
-            <column name="title" type="varchar(255)">
+
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="longvarchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="category_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_activity_category" references="category(id)"/>
             </column>
         </createTable>
     </changeSet>
