@@ -11,12 +11,15 @@
 <body>
 
 <div layout:fragment="main-content">
-    <div class="jumbotron mb-0">
-        <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">Welcome to mgm go.</p>
+    <div class="jumbotron mb-0 bg-white">
+        <h5 class="display-4">Welcome to mgm go!</h5>
         <hr class="my-4">
         <p>You can find events, places and anything in here.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        <div th:if="${not #lists.isEmpty(activities)}" th:each="item: ${activities}" class="activities" >
+            <div class="activity-item">
+                <a th:href="@{/activity/{id}(id=${item.id})}" class="activity-name">[[${item.name}]]</a>
+            </div>
+        </div>
     </div>
 </div>
 

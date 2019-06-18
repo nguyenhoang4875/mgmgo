@@ -9,3 +9,39 @@
     text-align: center;
 }
 
+.activities{
+    position: relative;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-animation-direction: normal;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+}
+
+.activity-item{
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-color: #cccccc;
+}
+
+.activity-item:hover{
+    background-color: paleturquoise !important ;
+    border-left: 5px solid #2196F3!important;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.activity-item:hover a{
+    font-weight: 500;
+    text-decoration:none;
+}
+
+.activity-name{
+    color: black !important;
+    text-decoration:none;
+}
+
