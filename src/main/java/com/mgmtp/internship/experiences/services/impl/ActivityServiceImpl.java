@@ -2,6 +2,7 @@ package com.mgmtp.internship.experiences.services.impl;
 
 
 import com.mgmtp.internship.experiences.dto.ActivityDTO;
+import com.mgmtp.internship.experiences.dto.ActivityDetailDTO;
 import com.mgmtp.internship.experiences.repositories.ActivityRepository;
 import com.mgmtp.internship.experiences.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,10 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<ActivityDTO> findAll() {
         return activityRepository.findAll();
+    }
+
+    @Override
+    public ActivityDetailDTO findById(long activityId) {
+        return activityRepository.findById(activityId);
     }
 }
