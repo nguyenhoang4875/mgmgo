@@ -1,6 +1,7 @@
 package com.mgmtp.internship.experiences.services.impl;
 
 import com.mgmtp.internship.experiences.dto.ActivityDTO;
+import com.mgmtp.internship.experiences.dto.ActivityDetailDTO;
 import com.mgmtp.internship.experiences.repositories.ActivityRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,12 +29,33 @@ public class ActivityServiceImplTest {
     private ActivityServiceImpl activityService;
 
     @Test
-    public void shouldReturnAllActivities(){
+    public void shouldReturnAllActivities() {
         List<ActivityDTO> expectedListActivityDTO = Arrays.asList(new ActivityDTO(1, "name"));
         Mockito.when(activityRepository.findAll()).thenReturn(expectedListActivityDTO);
 
         List<ActivityDTO> actualListActivityDTO = activityService.findAll();
 
         Assert.assertEquals(expectedListActivityDTO, actualListActivityDTO);
+    }
+
+    @Test
+    public void shouldReturnActivityById() {
+        long activityId = 1;
+        ActivityDetailDTO expectedActivityDetailDTO = new ActivityDetailDTO(activityId, "name", "description", "cate");
+        Mockito.when(activityRepository.findById(activityId)).thenReturn(expectedActivityDetailDTO);
+
+        ActivityDetailDTO actualActivityDetailDTO = activityService.findById(activityId);
+
+        Assert.assertEquals(expectedActivityDetailDTO, actualActivityDetailDTO);
+    }
+
+    @Test
+    public void shouldReturnNullIfActivityNotFound() {
+        long invalidId = 1;
+        Mockito.when(activityRepository.findById(invalidId)).thenReturn(null);
+
+        ActivityDetailDTO actualActivityDetailDTO = activityService.findById(invalidId);
+
+        Assert.assertEquals(null, actualActivityDetailDTO);
     }
 }
