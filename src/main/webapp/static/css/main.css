@@ -7,12 +7,19 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 14px;
+    color: #666;
+    background-color: #fff;
+    line-height: 1.7em;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/*.wrapper {*/
-/*    margin-top: 60px;*/
-/*}*/
-
+.content-wrapper {
+    padding-top: 66px;
+}
 
 .page-footer {
     background-color: #1d76bb;

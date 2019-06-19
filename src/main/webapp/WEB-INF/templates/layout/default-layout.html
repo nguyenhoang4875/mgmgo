@@ -10,14 +10,13 @@
 
     <body>
         <!-- Header, navbar,...-->
-        <div th:replace="fragments/header :: header">This header content is going to be replaced.</div>
+        <header th:replace="fragments/header :: header">This header content is going to be replaced.</header>
 
         <!-- main content -->
-        <div layout:fragment="main-content"></div>
+        <div layout:fragment="main-content" class="content-wrapper"></div>
 
         <!-- footer -->
         <footer th:replace="fragments/footer :: footer" class="footer"></footer>
-
 
         <!-- default script (bootstrap, jquery) -->
         <th:block th:replace="fragments/script"></th:block>
