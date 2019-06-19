@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -65,15 +68,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public HttpComponentsClientHttpRequestFactory httpRequestFactory(){
+    public HttpComponentsClientHttpRequestFactory httpRequestFactory() {
         HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
         httpRequestFactory.setConnectionRequestTimeout(15000);
         httpRequestFactory.setConnectTimeout(15000);
         httpRequestFactory.setReadTimeout(15000);
-        return httpRequestFactory ;
+        return httpRequestFactory;
     }
+
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate(httpRequestFactory());
         return restTemplate;
     }
@@ -89,5 +93,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         resourceHandlerRegistry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
-
+    @Controller
+    @RequestMapping("/error")
+    public class ErrorController {
+        @GetMapping
+        public String error() {
+            return "error";
+        }
+    }
 }
