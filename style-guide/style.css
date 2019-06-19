@@ -1,0 +1,125 @@
+.head {
+    border-style: solid;
+    border-bottom-color: #1D76BB;
+    background-color: #ffffff;
+}
+.option {
+    display: flex;
+}
+.option a h3 {
+    font-weight: lighter;
+    color: #000000;
+}
+.nav-tabs .nav-link.active h3{
+    background-color: #ffffff;
+    border-color: #a8b4bd;
+    border-bottom: none;
+    color: black;
+    font-weight: normal;
+}
+.option a:hover{
+    background-color: #b3ecff;
+}
+.boxColorInfo{
+    margin: 10px;
+    width: auto;
+    height: 250px;
+}
+.colorInfo2{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.colorChoose{
+    border: 1px solid black;
+}
+.boxColor{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+}
+.boxFontInfo{
+    height: auto;
+    width: auto;
+    border: none;
+    margin-bottom: 2em;
+}
+/*            .text-muted{
+                padding: 2px;
+                height: auto;
+                width: auto;
+                color: black;
+            }*/
+.boxFontInfo table{
+    width: 100%;
+    border: solid grey 1px;
+}
+.boxExample{
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+}
+.boxFontInfo table tr th{
+    background-color: #f0f0f5;
+    border: solid grey 1px;
+}
+.boxFontInfo table tr td{
+    border: solid grey 1px;
+    height: 3em;
+}
+.colorElement{
+    padding: 1em;
+}
+.colorElement h2{
+    margin-bottom: 1em;
+}
+.my-icon {
+    width: 30px;
+    text-align: center;
+}
+
+.section-preview {
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+}
+
+.bg-code {
+    background-color: #eee;
+}
+
+pre {
+    counter-reset: line;
+}
+
+code {
+    counter-increment: line;
+}
+
+code::before {
+    content: counter(line) ". ";
+}
+
+.language-html {
+    color: #000;
+    background: 0 0;
+    text-shadow: 0 1px #fff;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+}
+
+.token.tag {
+    color: #905;
+}
+
+.token.punctuation {
+    color: #999;
+}
+
+.token.attr-name {
+    color: #690;
+}
+
+.token.attr-value {
+    color: #07a;
+}
