@@ -87,7 +87,7 @@
             <version>${thymeleaf-layout-version}</version>
         </dependency>
 
-<!--         Bootstrap & jquery-->
+        <!--Bootstrap, jquery, fontawesome-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
@@ -98,6 +98,12 @@
             <artifactId>jquery</artifactId>
             <version>${jquery-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+
 
         <!--JSON-->
         <dependency>
