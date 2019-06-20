@@ -24,9 +24,9 @@ body {
 .page-footer {
     background-color: #1d76bb;
     margin-top: auto;
-    color: rgba(255, 255, 255, .6);
-;
+    color: rgba(255, 255, 255, .6);;
 }
+
 .footer-link {
     color: rgba(255, 255, 255, .6);
     font-size: 1rem;
@@ -45,4 +45,28 @@ body {
 
 .text-decoration-none {
     text-decoration: none !important;
+}
+
+
+.text-primary {
+    color: #1d76bb !important;
+}
+
+.bg-primary {
+    background-color: #1d76bb !important;
+}
+
+.btn-primary {
+    background-color: #1d76bb !important;
+}
+.text-warning {
+    color: #fbbe0a !important;
+}
+
+.bg-warning {
+    background-color: #fbbe0a !important;
+}
+
+.btn-warning {
+    background-color: #fbbe0a !important;
 }
