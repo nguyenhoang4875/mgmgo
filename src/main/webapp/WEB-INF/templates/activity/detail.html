@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en" xmlns:th="www.thymeLeaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default-layout}">
+<head>
+    <title>mgm go</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/home/index.css}"/>
+
+</head>
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <div class="card text-center">
+            <div class="card-body">
+                <h4 th:text="${activityInfo.getName()}" class="card-title"></h4>
+                <h5 class="card-text">Activity type: </h5>
+                <p th:text="${activityInfo.categoryName}" class="card-text"></p>
+                <h5 class="card-text">Description: </h5>
+                <p th:text="${activityInfo.description}" class="card-text"></pth:text>
+                    <a th:href="@{/}" class="btn btn-primary">Back to list</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
