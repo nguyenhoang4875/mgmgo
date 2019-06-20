@@ -1,25 +1,58 @@
 .head {
-    border-style: solid;
-    border-bottom-color: #1D76BB;
     background-color: #ffffff;
+    border: 3px solid #1d76bb;
 }
 .option {
     display: flex;
 }
 .option a h3 {
-    font-weight: lighter;
+    font-weight: normal;
     color: #000000;
 }
+.nav-tabs .nav-item {
+     margin-bottom: 0px !important;
+}
 .nav-tabs .nav-link.active h3{
-    background-color: #ffffff;
-    border-color: #a8b4bd;
-    border-bottom: none;
-    color: black;
-    font-weight: normal;
+    /*background-color: #ffffff;*/
+    /*color: #1d76bb;*/
+    /*font-weight: normal;*/
+}
+.nav-tabs .nav-link {
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid transparent;
+}
+.nav-tabs .nav-link.active {
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #1d76bb !important ;
+
+    /*border-color: #1d76bb;*/
+    /*border-bottom: 4px;* /
+    /*border-width: 3px;*/
+    /*border-top: none;*/
+    /*border-bottom: none;*/
+}
+.nav-tabs .nav-link.active h3 {
+    color: #1d76bb;
+
 }
 .option a:hover{
-    background-color: #b3ecff;
+    border-bottom: 2px solid #1d76bb !important ;
+
+    /*background-color:  #b3ecff;*/
 }
+
+.option a:hover h3 {
+    background-color: #ffffff;
+    color: #1d76bb;
+}
+
+/*.option a h3:hover {*/
+/*    background-color: #ffffff;*/
+/*    color: #1d76bb;*/
+/*    font-weight: normal;*/
+/*}*/
 .boxColorInfo{
     margin: 10px;
     width: auto;
@@ -46,12 +79,6 @@
     border: none;
     margin-bottom: 2em;
 }
-/*            .text-muted{
-                padding: 2px;
-                height: auto;
-                width: auto;
-                color: black;
-            }*/
 .boxFontInfo table{
     width: 100%;
     border: solid grey 1px;
@@ -122,4 +149,8 @@ code::before {
 
 .token.attr-value {
     color: #07a;
+}
+.imgFixed{
+    height: auto;
+    width: 180px;
 }
