@@ -71,8 +71,9 @@ body {
 }
 
 .navbar a:active {
-    color: #333!important;
-    background:none!important;
+    color: #333 !important;
+    background: none !important;
+}
 
 #header_area{
     background: #fff;
