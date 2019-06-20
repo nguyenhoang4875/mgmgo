@@ -1,19 +1,20 @@
-<div xmlns:th="www.thymeLeaf.org" th:fragment="header">
-    <header class="header_area">
-        <nav class="navbar navbar-expand-lg navbar-light menu_box_shadow">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="/"><img src="/static/images/mgm-go-logo.png" class="logo_img" alt="mgm-go"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    </ul>
-                </div>
+<header xmlns:th="www.thymeLeaf.org" th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light menu_box_shadow fixed-top bg-white">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="/">
+                <img src="/static/images/mgm-go-logo.png" class="logo_img" alt="mgm-go">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
-</div>
+        </div>
+    </nav>
+</header>
