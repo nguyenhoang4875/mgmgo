@@ -1,5 +1,6 @@
 package com.mgmtp.internship.experiences.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
@@ -31,6 +32,12 @@ public class PersistenceConfig {
 
     @Value("${spring.datasource.password}")
     private String password;
+
+    @Value("${liquibase.changeLog}")
+    private String changeLog;
+
+    @Value("${liquibase.dropFirst}")
+    private boolean dropFirst;
 
     @Bean
     DataSource dataSource() {
@@ -104,4 +111,15 @@ public class PersistenceConfig {
         org.jooq.Configuration config = this.getDslConfig();
         return new DefaultDSLContext(config);
     }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:"+changeLog);
+        liquibase.setDataSource(dataSource());
+        liquibase.setDropFirst(dropFirst);
+        return liquibase;
+    }
+
+
 }
