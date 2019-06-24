@@ -47,7 +47,6 @@ body {
     text-decoration: none !important;
 }
 
-
 .text-primary {
     color: #1d76bb !important;
 }
@@ -69,4 +68,8 @@ body {
 
 .btn-warning {
     background-color: #fbbe0a !important;
+}
+
+.btn-toggle:focus {
+    outline: none;
 }
