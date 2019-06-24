@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Activity extends TableImpl<ActivityRecord> {
 
-    private static final long serialVersionUID = -382025448;
+    private static final long serialVersionUID = -1314987486;
 
     /**
      * The reference instance of <code>public.activity</code>
@@ -70,11 +70,6 @@ public class Activity extends TableImpl<ActivityRecord> {
      * The column <code>public.activity.description</code>.
      */
     public final TableField<ActivityRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
-
-    /**
-     * The column <code>public.activity.category_id</code>.
-     */
-    public final TableField<ActivityRecord, Long> CATEGORY_ID = createField("category_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * Create a <code>public.activity</code> table reference
@@ -147,18 +142,6 @@ public class Activity extends TableImpl<ActivityRecord> {
     @Override
     public List<UniqueKey<ActivityRecord>> getKeys() {
         return Arrays.<UniqueKey<ActivityRecord>>asList(Keys.PK_ACTIVITY);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<ForeignKey<ActivityRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<ActivityRecord, ?>>asList(Keys.ACTIVITY__FK_ACTIVITY_CATEGORY);
-    }
-
-    public Category category() {
-        return new Category(this, Keys.ACTIVITY__FK_ACTIVITY_CATEGORY);
     }
 
     /**

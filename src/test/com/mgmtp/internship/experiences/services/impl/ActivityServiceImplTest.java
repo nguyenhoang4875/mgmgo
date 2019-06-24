@@ -41,7 +41,7 @@ public class ActivityServiceImplTest {
     @Test
     public void shouldReturnActivityById() {
         long activityId = 1;
-        ActivityDetailDTO expectedActivityDetailDTO = new ActivityDetailDTO(activityId, "name", "description", "cate");
+        ActivityDetailDTO expectedActivityDetailDTO = new ActivityDetailDTO(activityId, "name", "description");
         Mockito.when(activityRepository.findById(activityId)).thenReturn(expectedActivityDetailDTO);
 
         ActivityDetailDTO actualActivityDetailDTO = activityService.findById(activityId);

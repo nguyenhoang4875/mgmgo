@@ -8,7 +8,7 @@
     <changeSet id="create_activity_table" author="vhduong">
         <createTable tableName="activity" remarks="activity table">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints primaryKey="true" nullable="false"/>
             </column>
 
             <column name="name" type="varchar(255)">
@@ -19,9 +19,6 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="category_id" type="bigint">
-                <constraints nullable="false" foreignKeyName="fk_activity_category" references="category(id)"/>
-            </column>
         </createTable>
     </changeSet>
 

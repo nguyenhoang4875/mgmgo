@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.mgmtp.internship.experiences.model.tables.Tables.CATEGORY;
 import static com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
 
 /**
@@ -33,10 +32,7 @@ public class ActivityRepository {
     }
 
     public ActivityDetailDTO findById(long activityId) {
-        SelectConditionStep activity = dslContext
-                .select(CATEGORY.NAME.as("categoryName"), ACTIVITY.DESCRIPTION, ACTIVITY.ID, ACTIVITY.NAME)
-                .from(ACTIVITY).join(CATEGORY)
-                .on(ACTIVITY.CATEGORY_ID.eq(CATEGORY.ID))
+        SelectConditionStep activity = dslContext.selectFrom(ACTIVITY)
                 .where(ACTIVITY.ID.eq(activityId));
 
         if (activity == null) {

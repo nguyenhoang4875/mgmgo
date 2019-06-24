@@ -5,7 +5,6 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
-import com.mgmtp.internship.experiences.model.tables.tables.Category;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 
 import javax.annotation.Generated;
@@ -28,11 +27,6 @@ public class Tables {
      * activity table
      */
     public static final Activity ACTIVITY = com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
-
-    /**
-     * category table
-     */
-    public static final Category CATEGORY = com.mgmtp.internship.experiences.model.tables.tables.Category.CATEGORY;
 
     /**
      * user table

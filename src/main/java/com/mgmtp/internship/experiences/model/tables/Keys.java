@@ -5,15 +5,12 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
-import com.mgmtp.internship.experiences.model.tables.tables.Category;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 import com.mgmtp.internship.experiences.model.tables.tables.records.ActivityRecord;
-import com.mgmtp.internship.experiences.model.tables.tables.records.CategoryRecord;
 import com.mgmtp.internship.experiences.model.tables.tables.records.UserRecord;
 
 import javax.annotation.Generated;
 
-import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
@@ -38,7 +35,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<ActivityRecord, Long> IDENTITY_ACTIVITY = Identities0.IDENTITY_ACTIVITY;
-    public static final Identity<CategoryRecord, Long> IDENTITY_CATEGORY = Identities0.IDENTITY_CATEGORY;
     public static final Identity<UserRecord, Long> IDENTITY_USER = Identities0.IDENTITY_USER;
 
     // -------------------------------------------------------------------------
@@ -46,14 +42,12 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<ActivityRecord> PK_ACTIVITY = UniqueKeys0.PK_ACTIVITY;
-    public static final UniqueKey<CategoryRecord> PK_CATEGORY = UniqueKeys0.PK_CATEGORY;
     public static final UniqueKey<UserRecord> PK_USER = UniqueKeys0.PK_USER;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<ActivityRecord, CategoryRecord> ACTIVITY__FK_ACTIVITY_CATEGORY = ForeignKeys0.ACTIVITY__FK_ACTIVITY_CATEGORY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -61,17 +55,11 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<ActivityRecord, Long> IDENTITY_ACTIVITY = Internal.createIdentity(Activity.ACTIVITY, Activity.ACTIVITY.ID);
-        public static Identity<CategoryRecord, Long> IDENTITY_CATEGORY = Internal.createIdentity(Category.CATEGORY, Category.CATEGORY.ID);
         public static Identity<UserRecord, Long> IDENTITY_USER = Internal.createIdentity(User.USER, User.USER.ID);
     }
 
     private static class UniqueKeys0 {
         public static final UniqueKey<ActivityRecord> PK_ACTIVITY = Internal.createUniqueKey(Activity.ACTIVITY, "pk_activity", Activity.ACTIVITY.ID);
-        public static final UniqueKey<CategoryRecord> PK_CATEGORY = Internal.createUniqueKey(Category.CATEGORY, "pk_category", Category.CATEGORY.ID);
         public static final UniqueKey<UserRecord> PK_USER = Internal.createUniqueKey(User.USER, "pk_user", User.USER.ID);
-    }
-
-    private static class ForeignKeys0 {
-        public static final ForeignKey<ActivityRecord, CategoryRecord> ACTIVITY__FK_ACTIVITY_CATEGORY = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_CATEGORY, Activity.ACTIVITY, "activity__fk_activity_category", Activity.ACTIVITY.CATEGORY_ID);
     }
 }
