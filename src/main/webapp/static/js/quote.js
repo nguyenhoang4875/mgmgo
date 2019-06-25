@@ -10,7 +10,7 @@ function getQuote() {
         .then(function (quote) {
             console.log(quote)
             $('#quote-content').html(quote.content);
-            $('#quote-author').text(quote.title || "Bruce Lee");
+            $('#quote-author').text(`- ${quote.title} -`);
 
             $('.quote-wrapper').removeClass('invisible');
         })
