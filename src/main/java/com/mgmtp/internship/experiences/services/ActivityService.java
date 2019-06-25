@@ -12,5 +12,8 @@ import java.util.List;
  */
 public interface ActivityService {
     List<ActivityDTO> findAll();
+
     ActivityDetailDTO findById(long activityId);
+
+    int updateActivity(long activityId, String newName, String newDescription);
 }

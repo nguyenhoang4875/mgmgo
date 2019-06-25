@@ -41,4 +41,11 @@ public class ActivityRepository {
         return (ActivityDetailDTO) activity.fetchOneInto(ActivityDetailDTO.class);
     }
 
+    public int updateActivity(long activityId, String newName, String newDescription) {
+        return dslContext.update(ACTIVITY)
+                .set(ACTIVITY.NAME, newName)
+                .set(ACTIVITY.DESCRIPTION, newDescription)
+                .where(ACTIVITY.ID.eq(activityId)).execute();
+    }
+
 }

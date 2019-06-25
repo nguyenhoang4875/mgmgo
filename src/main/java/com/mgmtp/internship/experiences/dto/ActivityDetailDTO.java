@@ -1,5 +1,10 @@
 package com.mgmtp.internship.experiences.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Activity detail.
  *
@@ -7,8 +12,18 @@ package com.mgmtp.internship.experiences.dto;
  */
 public class ActivityDetailDTO {
 
+
     private long id;
+
+    @NotNull(message = "Name may not be null")
+    @NotBlank(message = "Name may not be blank")
+    @Size(max = 100, message = "You can't not write more than 100 characters")
     private String name;
+
+
+    @NotNull(message = "Description may not be null")
+    @NotBlank(message = "Description may not be blank")
+    @Size(max = 100000, message = "You can't not write more than 10000 characters")
     private String description;
 
     public ActivityDetailDTO() {
