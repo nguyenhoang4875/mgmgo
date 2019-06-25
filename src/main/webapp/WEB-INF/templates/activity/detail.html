@@ -6,7 +6,10 @@
 <head>
     <title th:text="${activityInfo.getName()}"></title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/activity/detail.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/home/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/editPicture/editPicture.css}"/>
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta type="text" name="csrf-token" th:content="${_csrf!=null?_csrf.token:''}"/>
     <meta type="text" name="csrf-header" th:content="${_csrf!=null?_csrf.headerName:'X-CSRF-Token'}"/>
 </head>
@@ -32,6 +35,7 @@
                     </button>
                 </div>
             </div>
+            <th:block th:replace="activity/fragments/upload-picture"></th:block>
             <p th:text="${activityInfo.description}" class="card-text"></p>
             <div class="d-flex justify-content-end">
                 <a th:href="@{/activity/update/{activityId}(activityId=${activityId})}"
@@ -39,6 +43,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="rateModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -68,8 +73,11 @@
         </div>
     </div>
 </div>
+
 <th:block layout:fragment="custom-script">
+    <script src="/static/js/image.js?n=1"></script>
     <script type="text/javascript" src="/static/js/rate.js"></script>
 </th:block>
+
 </body>
 </html>

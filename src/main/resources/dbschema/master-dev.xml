@@ -9,5 +9,7 @@
     <include file="testdata/user_test.sql" relativeToChangelogFile="true"/>
     <include file="testdata/activity_test.sql" relativeToChangelogFile="true"/>
     <include file="testdata/rating_test.sql" relativeToChangelogFile="true"/>
+    <include file="testdata/image_test.xml" relativeToChangelogFile="true"/>
+    <include file="testdata/activity_image_test.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

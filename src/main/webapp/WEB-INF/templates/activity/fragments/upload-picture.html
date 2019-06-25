@@ -1,0 +1,48 @@
+<th:block xmlns:th="www.thymeLeaf.org" th:fragment="upload">
+    <div class="image-wrapper">
+        <img id="image-on-detail-page"
+             th:src="${activityInfo.imageId!=null}?@{/api/image/}+${activityInfo.imageId}:@{/static/images/no-img.png}"
+             alt=""/>
+    </div>
+    <button type="button" class="btn btn-primary d-block mx-auto my-2" data-toggle="modal"
+            data-target="#exampleModalCenter"> Upload image
+    </button>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Upload image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="upload-image-form"
+                      th:action="@{/api/image/activity/{activityId}(activityId=${activityInfo.getId()})}" method="post"
+                      enctype="multipart/form-data">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <div class="modal-body">
+                        <input id="activity-id" type="text" th:value="${activityInfo.getId()}" hidden/>
+                        <div id="image-error" class="alert alert-danger d-none"></div>
+                        <div id="image-preview-container" class="container">
+                            <div class="image-wrapper">
+                                <img id="image"
+                                     th:src="${activityInfo.imageId!=null}?@{/api/image/}+${activityInfo.imageId}:@{/static/images/no-img.png}"
+                                     alt=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="file" class="d-none" id="upload-image"
+                           aria-describedby="inputGroupFileAddon01" accept="image/*"/>
+                    <div id="save-and-cancel-container" class="modal-footer">
+                        <label id="upload-image-label-2" class="btn btn-outline-secondary mb-0"
+                               for="upload-image">Change picture</label>
+                        <input type="submit" class="btn btn-success" value="Save"></input>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:block>
