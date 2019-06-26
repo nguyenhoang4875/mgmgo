@@ -8,5 +8,6 @@
     <include file="master.xml" relativeToChangelogFile="true"/>
     <include file="testdata/user_test.sql" relativeToChangelogFile="true"/>
     <include file="testdata/activity_test.sql" relativeToChangelogFile="true"/>
+    <include file="testdata/rating_test.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
