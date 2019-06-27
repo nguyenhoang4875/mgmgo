@@ -25,14 +25,17 @@ public class ActivityDetailDTO {
     @NotBlank(message = "Description may not be blank")
     @Size(max = 100000, message = "You can't not write more than 10000 characters")
     private String description;
+    private double rating;
 
     public ActivityDetailDTO() {
+
     }
 
-    public ActivityDetailDTO(long id, String name, String description) {
+    public ActivityDetailDTO(long id, String name, String description, double rating) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.rating = rating;
     }
 
     public long getId() {
@@ -57,6 +60,14 @@ public class ActivityDetailDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 
 }

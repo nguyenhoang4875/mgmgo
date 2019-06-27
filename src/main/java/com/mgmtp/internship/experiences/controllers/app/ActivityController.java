@@ -33,7 +33,6 @@ public class ActivityController {
             model.addAttribute("activityInfo", activityDetailDTO);
             return "activity/detail";
         }
-
         return "error";
     }
 

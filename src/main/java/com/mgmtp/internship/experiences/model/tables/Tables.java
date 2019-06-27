@@ -5,6 +5,7 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
+import com.mgmtp.internship.experiences.model.tables.tables.Rating;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 
 import javax.annotation.Generated;
@@ -27,6 +28,11 @@ public class Tables {
      * activity table
      */
     public static final Activity ACTIVITY = com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
+
+    /**
+     * rating table
+     */
+    public static final Rating RATING = com.mgmtp.internship.experiences.model.tables.tables.Rating.RATING;
 
     /**
      * user table

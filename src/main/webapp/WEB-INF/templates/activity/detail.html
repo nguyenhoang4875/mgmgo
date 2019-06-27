@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      lang="en" xmlns:th="www.thymeleaf.org"
+      lang="en" xmlns:th="www.thymeLeaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default-layout}">
 <head>
-    <title>mgm go</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/home/index.css}"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${activityInfo.getName()}"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/activity/detail.css}"/>
 
-
+    <meta type="text" name="csrf-token" th:content="${_csrf!=null?_csrf.token:''}"/>
+    <meta type="text" name="csrf-header" th:content="${_csrf!=null?_csrf.headerName:'X-CSRF-Token'}"/>
 </head>
 <body>
 <div layout:fragment="main-content">
-    <div class="container">
-        <div class="card text-center">
-            <div class="card-body">
-                <h4 th:text="${activityInfo.getName()}" class="card-title"></h4>
-                <h5 class="card-text">Description: </h5>
-                <p th:text="${activityInfo.description}" class="card-text"></p>
-                <a th:href="@{/}" class="btn btn-primary">Back to list</a>
-                <a th:href="@{/activity/update/{activityId}(activityId=${activityId})}" class="btn btn-primary">Edit</a>
+    <div id="action-bar" class="col-12 px-0">
+        <a th:href="@{/}"><i class="fa fa-arrow-left"></i> Back to home</a>
+    </div>
+    <div class="card" id="activity-detail">
+        <div class="card-body px-0">
+            <div id="detail-header" class="card-title col-12 row mx-0">
+                <h1 th:text="${activityInfo.getName()}" id="detail-title"></h1>
+                <div id="activity-rating">
+                    <button class="row px-0 mx-0" data-toggle="modal" id="rate-button" data-target="#rateModal">
+                        <div id="rating-star">
+                            <i class="fa fa-star" id="star-filled"></i>
+                            <i class="fa fa-star-o" id="star-empty"></i>
+                            <i class="fa fa-star" id="star-removed"
+                               th:style="'height: '+${activityInfo.getRating()>0?(15+(1-(activityInfo.getRating()/5))*65):100}+'%;'"></i>
+                        </div>
+                        <div id="rating-score" th:text="${activityInfo.getRating()}"
+                             th:class="'px-1'+${activityInfo.getRating()>0?'':' d-none'}"></div>
+                    </button>
+                </div>
+            </div>
+            <p th:text="${activityInfo.description}" class="card-text"></p>
+            <div class="d-flex justify-content-end">
+                <a th:href="@{/activity/update/{activityId}(activityId=${activityId})}"
+                   class="btn btn-primary text-right">Edit</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="rateModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="rateModalLabel">Rate this activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="activity-id" type="text" th:value="${activityInfo.getId()}" hidden/>
+                    <input id="user-rating" type="text" value="0" hidden/>
+                    <div class="alert d-none" id="rate-return"></div>
+                    <div class="justify-content-center" id="rate-stars">
+                        <button class="fa fa-star rate-star" data-rating='1'></button>
+                        <button class="fa fa-star rate-star" data-rating='2'></button>
+                        <button class="fa fa-star rate-star" data-rating='3'></button>
+                        <button class="fa fa-star rate-star" data-rating='4'></button>
+                        <button class="fa fa-star rate-star" data-rating='5'></button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="rate-save">Save</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<th:block layout:fragment="custom-script">
+    <script type="text/javascript" src="/static/js/rate.js"></script>
+</th:block>
 </body>
 </html>

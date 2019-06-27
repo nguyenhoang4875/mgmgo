@@ -3,14 +3,18 @@ package com.mgmtp.internship.experiences.repositories;
 import com.mgmtp.internship.experiences.dto.ActivityDTO;
 import com.mgmtp.internship.experiences.dto.ActivityDetailDTO;
 import org.jooq.DSLContext;
-import org.jooq.SelectConditionStep;
+import org.jooq.Record4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
+import static com.mgmtp.internship.experiences.model.tables.tables.Rating.RATING;
+import static org.jooq.impl.DSL.avg;
+import static org.jooq.impl.DSL.round;
 
 /**
  * Activity Repository.
@@ -32,13 +36,15 @@ public class ActivityRepository {
     }
 
     public ActivityDetailDTO findById(long activityId) {
-        SelectConditionStep activity = dslContext.selectFrom(ACTIVITY)
-                .where(ACTIVITY.ID.eq(activityId));
+        Record4<Long, String, String, BigDecimal> activity = dslContext.select(ACTIVITY.ID,
+                ACTIVITY.NAME, ACTIVITY.DESCRIPTION, round(avg(RATING.VALUE), 1).as("rating"))
+                .from(ACTIVITY)
+                .leftJoin(RATING)
+                .on(ACTIVITY.ID.eq(RATING.ACTIVITY_ID))
+                .where(ACTIVITY.ID.eq(activityId))
+                .groupBy(ACTIVITY.ID).fetchOne();
 
-        if (activity == null) {
-            return null;
-        }
-        return (ActivityDetailDTO) activity.fetchOneInto(ActivityDetailDTO.class);
+        return activity == null ? null : activity.into(ActivityDetailDTO.class);
     }
 
     public int updateActivity(long activityId, String newName, String newDescription) {
