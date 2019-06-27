@@ -5,6 +5,7 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
+import com.mgmtp.internship.experiences.model.tables.tables.Rating;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 
 import javax.annotation.Generated;
@@ -32,6 +33,7 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index PK_ACTIVITY = Indexes0.PK_ACTIVITY;
+    public static final Index PK_RATING = Indexes0.PK_RATING;
     public static final Index PK_USER = Indexes0.PK_USER;
 
     // -------------------------------------------------------------------------
@@ -40,6 +42,7 @@ public class Indexes {
 
     private static class Indexes0 {
         public static Index PK_ACTIVITY = Internal.createIndex("pk_activity", Activity.ACTIVITY, new OrderField[] { Activity.ACTIVITY.ID }, true);
+        public static Index PK_RATING = Internal.createIndex("pk_rating", Rating.RATING, new OrderField[] { Rating.RATING.ID }, true);
         public static Index PK_USER = Internal.createIndex("pk_user", User.USER, new OrderField[] { User.USER.ID }, true);
     }
 }

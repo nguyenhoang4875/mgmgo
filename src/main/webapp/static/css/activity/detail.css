@@ -72,7 +72,8 @@
 
 #rateModal button.rate-star {
     color: #6c757d;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    padding: 0.3rem;
     background: none;
     border: none;
     outline: none;

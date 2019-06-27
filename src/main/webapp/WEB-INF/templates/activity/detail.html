@@ -33,6 +33,10 @@
                 </div>
             </div>
             <p th:text="${activityInfo.description}" class="card-text"></p>
+            <div class="d-flex justify-content-end">
+                <a th:href="@{/activity/update/{activityId}(activityId=${activityId})}"
+                   class="btn btn-primary text-right">Edit</a>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="rateModalLabel"
