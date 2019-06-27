@@ -32,9 +32,9 @@ public class HomeControllerTest {
     private HomeController homeController;
 
     @Test
-    public void shouldReturnModelHaveListActivity(){
+    public void shouldReturnModelHaveListActivity() {
         final Model model = new ExtendedModelMap();
-        List<ActivityDTO> expectedActivityDTO = Arrays.asList(new ActivityDTO(1,"abc"));
+        List<ActivityDTO> expectedActivityDTO = Arrays.asList(new ActivityDTO(1, "abc"));
         Mockito.when(activityService.findAll()).thenReturn(expectedActivityDTO);
 
         String actualView = homeController.getHome(model);
@@ -42,4 +42,5 @@ public class HomeControllerTest {
         assertThat(actualView, is("home/index"));
         assertThat(model.asMap().get("activities"), is(expectedActivityDTO));
     }
+
 }

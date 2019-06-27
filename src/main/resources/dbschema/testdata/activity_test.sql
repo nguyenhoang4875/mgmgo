@@ -2,7 +2,7 @@ INSERT INTO activity ( name, description)
 VALUES ('Dasushi - Ăn Nhậu Kiểu Nhật', 'Ẩm thực Nhật Bản dẫn trở nên quen thuộc với người dân Việt Nam, đặc biệt là ở các thành phố lớn như Hà Nội, TPHCM, và Đà Nẵng không thể thiếu rồi. Đà Nẵng nổi tiếng với nhà hàng Dasushi - Ăn Nhậu Kiểu Nhật nằm trên tuyến đường đông nhất thành phố, sẽ là nơi thu hút sự chú ý của thực khách mỗi khi ngang qua.');
 
 INSERT INTO activity ( name, description)
-VALUES ('King - Trà Bí Đao & Trà Tắc - Phan Đăng Lưu', '');
+VALUES ('King - Trà Bí Đao & Trà Tắc - Phan Đăng Lưu', 'Trà ở đây ngon lắm');
 
 INSERT INTO activity ( name, description)
 VALUES ('Nhà Hàng Khang Garden', 'Không gian siêu siêu đẹp, sang trọng
@@ -10,7 +10,7 @@ Menu có rất nhiều món từ ăn sáng đến cơm gia đình đếm hải s
 Đang giảm 20% tới 15/6 mừng khai trương');
 
 INSERT INTO activity ( name, description)
-VALUES ('Trà Sữa Gong Cha - 貢茶 - Nguyễn Văn Linh', ' ');
+VALUES ('Trà Sữa Gong Cha - 貢茶 - Nguyễn Văn Linh', 'Trà sữa trung tâm, view đẹp lắm');
 
 INSERT INTO activity ( name, description)
 VALUES ('Biển Phạm Văn Đồng', 'Bãi biển Phạm Văn Đồng thuộc địa phận quận Sơn Trà, nằm cuối đường Phạm Văn Đồng, ngay cạnh công viên Biển Đông.');

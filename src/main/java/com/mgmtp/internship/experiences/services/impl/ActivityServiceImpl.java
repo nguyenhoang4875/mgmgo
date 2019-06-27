@@ -30,4 +30,9 @@ public class ActivityServiceImpl implements ActivityService {
     public ActivityDetailDTO findById(long activityId) {
         return activityRepository.findById(activityId);
     }
+
+    @Override
+    public int updateActivity(long activityId, String newName, String newDescription) {
+        return activityRepository.updateActivity(activityId, newName, newDescription);
+    }
 }
