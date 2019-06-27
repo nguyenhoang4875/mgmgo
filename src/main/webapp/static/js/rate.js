@@ -38,6 +38,10 @@ function enableSave() {
     $("#rate-save").prop("disabled", false);
 }
 
+function showRatingScore() {
+    $("#rating-score").removeClass("d-none");
+}
+
 function showStars() {
     $("#rate-stars").removeClass("d-none").addClass("d-flex");
 }
@@ -89,6 +93,10 @@ function setMessage(msg, isSuccess) {
     $("#rate-return").text(msg);
 }
 
+function hideMessage() {
+    $("#rate-return").addClass("d-none");
+}
+
 function setAverageRating(average) {
     $("#rating-score").text(average);
     $("#star-removed").css("height", (15 + (1 - (average / 5)) * 65) + "%");
@@ -96,6 +104,7 @@ function setAverageRating(average) {
 
 function fetchUserRating() {
     hideStars();
+    hideMessage();
     disableSave();
     setCurrentRating(0);
     $.get(
@@ -129,6 +138,7 @@ function postRating(currentRating) {
         else {
             hideModal();
             setAverageRating(data.rating);
+            showRatingScore();
         }
     }).fail(function (data) {
         enableSave();

@@ -25,10 +25,10 @@
                             <i class="fa fa-star" id="star-filled"></i>
                             <i class="fa fa-star-o" id="star-empty"></i>
                             <i class="fa fa-star" id="star-removed"
-                               th:style="'height: '+${activityInfo.getRating()>0?(15+(1-(activityInfo.getRating()/5))*65):0}+'%;'"></i>
+                               th:style="'height: '+${activityInfo.getRating()>0?(15+(1-(activityInfo.getRating()/5))*65):100}+'%;'"></i>
                         </div>
                         <div id="rating-score" th:text="${activityInfo.getRating()}"
-                             th:if="${activityInfo.getRating()>0}" class="px-1"></div>
+                             th:class="'px-1'+${activityInfo.getRating()>0?'':' d-none'}"></div>
                     </button>
                 </div>
             </div>
