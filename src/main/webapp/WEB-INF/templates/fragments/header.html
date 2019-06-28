@@ -17,7 +17,7 @@
                         <a class="nav-link" th:href="@{/login}" th:text="Login" sec:authorize="!isAuthenticated()"></a>
                         <div class="nav-link dropdown" sec:authorize="isAuthenticated()">
                             <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown"
-                               sec:authentication="name"> </a>
+                               sec:authentication="name" href="#"> </a>
                             <div class="dropdown-menu" aria-labelledby="user_dropdown">
                                 <a th:href="@{/logout}" class="dropdown-item">Logout</a>
                             </div>
