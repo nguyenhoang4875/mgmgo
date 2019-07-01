@@ -19,7 +19,6 @@ import java.util.Collections;
 public class UserDetailsServiceImplTest {
     private static final long EXPECTEDID = 1L;
     private static final String EXPECTEDUSERNAME = "username";
-    private static final String EXPECTEDPASSWORD = "password";
 
     @Mock
     private UserRepository userRepository;
@@ -29,7 +28,7 @@ public class UserDetailsServiceImplTest {
 
     @Test
     public void shouldReturnUserDetails() {
-        UserRecord expectedUserRecord = new UserRecord(EXPECTEDID, EXPECTEDUSERNAME, EXPECTEDPASSWORD);
+        UserRecord expectedUserRecord = new UserRecord(EXPECTEDID, EXPECTEDUSERNAME, Mockito.anyString());
         UserDetails expectedUserDetails = new CustomUserDetails(expectedUserRecord.getId(), expectedUserRecord.getUsername(), expectedUserRecord.getPassword(), Collections.emptyList());
         Mockito.when(userRepository.findUserByUsername(EXPECTEDUSERNAME)).thenReturn(expectedUserRecord);
 
@@ -42,6 +41,6 @@ public class UserDetailsServiceImplTest {
     public void shouldReturnUsernameNotFoundException() {
         Mockito.when(userRepository.findUserByUsername(EXPECTEDUSERNAME)).thenReturn(null);
 
-        UserDetails actualUserDetails = userDetailsService.loadUserByUsername(EXPECTEDUSERNAME);
+        userDetailsService.loadUserByUsername(EXPECTEDUSERNAME);
     }
 }

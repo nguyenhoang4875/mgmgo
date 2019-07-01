@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ApiResponse {
 
-    static enum ApiResponseStatus {SUCCESS, FAILED}
+    enum ApiResponseStatus {SUCCESS, FAILED}
 
     @JsonProperty("status")
     private final ApiResponseStatus responseStatus;

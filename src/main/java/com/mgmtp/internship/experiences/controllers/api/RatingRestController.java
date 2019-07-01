@@ -1,7 +1,6 @@
 package com.mgmtp.internship.experiences.controllers.api;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
-import com.mgmtp.internship.experiences.dto.ApiResponse;
 import com.mgmtp.internship.experiences.exceptions.ApiException;
 import com.mgmtp.internship.experiences.services.RatingService;
 import com.mgmtp.internship.experiences.services.UserService;

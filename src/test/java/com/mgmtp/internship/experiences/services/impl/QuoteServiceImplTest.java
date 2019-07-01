@@ -1,7 +1,6 @@
 package com.mgmtp.internship.experiences.services.impl;
 
 import com.mgmtp.internship.experiences.dto.QuoteDTO;
-import com.mgmtp.internship.experiences.services.impl.QuoteServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -10,9 +9,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit Test for QuotesService.
@@ -57,7 +55,7 @@ public class QuoteServiceImplTest {
         Mockito.doThrow(RestClientException.class)
                 .when(restTemplate).getForObject(QuoteServiceImpl.RANDOM_QUOTE_URL, QuoteDTO[].class);
 
-        QuoteDTO actualQuotesDTO = quoteServiceIml.getQuote();
+        quoteServiceIml.getQuote();
     }
 
 

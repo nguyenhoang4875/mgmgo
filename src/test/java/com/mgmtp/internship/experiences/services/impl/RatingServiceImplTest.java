@@ -3,13 +3,11 @@ package com.mgmtp.internship.experiences.services.impl;
 import com.mgmtp.internship.experiences.repositories.RatingRepository;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  * Unit test for rating service.
