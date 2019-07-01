@@ -25,6 +25,7 @@
         <bootstrap-version>4.0.0</bootstrap-version>
         <jquery-version>3.1.1</jquery-version>
         <springsecurity.version>5.1.5.RELEASE</springsecurity.version>
+        <jacoco-version>0.8.2</jacoco-version>
     </properties>
 
     <profiles>
@@ -346,6 +347,31 @@
                     <propertyFile>${liquibaseFile}</propertyFile>
                     <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-version}</version>
+                <configuration>
+                    <includes>
+                        <include>com/mgmtp/internship/experiences/controllers/**</include>
+                        <include>com/mgmtp/internship/experiences/services/**</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
