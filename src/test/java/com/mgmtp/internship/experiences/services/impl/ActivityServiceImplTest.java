@@ -23,7 +23,7 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class ActivityServiceImplTest {
     private static final long ACTIVITY_ID = 1;
-    private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "new", "Description");
+    private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "new", "Description", 5);
 
     @Mock
     private ActivityRepository activityRepository;
@@ -74,5 +74,4 @@ public class ActivityServiceImplTest {
 
         Assert.assertEquals(UPDATE_FAIL, activityService.updateActivity(ACTIVITY_ID, EXPECTED_ACTIVITY_DETAIL_DTO.getName(), EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()));
     }
-
 }
