@@ -23,7 +23,8 @@ import java.util.List;
 public class ActivityServiceImplTest {
     private static final long ACTIVITY_ID = 1;
     private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "new", "Description", 5);
-
+    private static final String KEY_SEARCH = "abc";
+    private static final List<ActivityDTO> EXPECTED_ACTIVITY_DTO = Collections.singletonList(new ActivityDTO(1L, "name"));
     @Mock
     private ActivityRepository activityRepository;
 
@@ -117,5 +118,23 @@ public class ActivityServiceImplTest {
         Mockito.when(activityRepository.checkExistNameForUpdate(EXPECTED_ACTIVITY_DETAIL_DTO.getId(), EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(false);
 
         Assert.assertEquals(false, activityService.checkExistNameForUpdate(EXPECTED_ACTIVITY_DETAIL_DTO.getId(), EXPECTED_ACTIVITY_DETAIL_DTO.getName()));
+    }
+
+    @Test
+    public void shouldReturnListActivitiesWhenKeySearchCorrect(){
+        Mockito.when(activityRepository.search(KEY_SEARCH)).thenReturn(EXPECTED_ACTIVITY_DTO);
+
+        List<ActivityDTO> actualListActivityDTO = activityService.search(KEY_SEARCH);
+
+        Assert.assertEquals(EXPECTED_ACTIVITY_DTO, actualListActivityDTO);
+    }
+
+    @Test
+    public void shouldReurnNullWhenKeySearchIncorrect(){
+        Mockito.when(activityRepository.search(KEY_SEARCH)).thenReturn(null);
+
+        List<ActivityDTO> actualListActivityDTO = activityService.search(KEY_SEARCH);
+
+        Assert.assertEquals(null, actualListActivityDTO);
     }
 }

@@ -71,6 +71,7 @@ public class ActivityRepository {
                 .where(ACTIVITY.NAME.likeIgnoreCase(activityName)
                         .and(ACTIVITY.ID.notEqual(activityId))));
     }
+
     public List<ActivityDTO> search(String text) {
         return dslContext.selectFrom(ACTIVITY)
                 .where(ACTIVITY.NAME.likeIgnoreCase('%' + text.trim() + '%'))
