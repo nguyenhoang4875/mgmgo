@@ -31,7 +31,7 @@ public class ActivityRepository {
         return dslContext.selectFrom(ACTIVITY)
                 .orderBy(ACTIVITY.ID)
                 .fetch().stream()
-                .map(activityRecord -> new ActivityDTO(activityRecord))
+                .map(ActivityDTO::new)
                 .collect(Collectors.toList());
     }
 

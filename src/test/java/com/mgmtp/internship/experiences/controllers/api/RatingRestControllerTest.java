@@ -26,7 +26,11 @@ import java.util.Collections;
 @RunWith(MockitoJUnitRunner.class)
 public class RatingRestControllerTest {
 
+    private static final String USERNAME = "username";
+    private static final String RATING_PARAM = "rating";
+    private static final String URL = "/rating/activity/1";
     private static final int ACTIVITY_ID = 1;
+
     private MockMvc mockMvc;
 
     @Mock
@@ -46,11 +50,11 @@ public class RatingRestControllerTest {
     @Test
     public void shouldReturnUserRating() throws Exception {
         int expectedRating = 5;
-        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "username", "pass", Collections.emptyList());
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
         Mockito.when(userService.getCurrentUser()).thenReturn(customUserDetails);
         Mockito.when(ratingService.getRateByUserId(ACTIVITY_ID, customUserDetails.getId())).thenReturn(expectedRating);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/rating/activity/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get(URL))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("{\"rating\":" + expectedRating + "}"));
     }
@@ -59,7 +63,7 @@ public class RatingRestControllerTest {
     public void shouldReturnErrorOnGetUserRatingIfNotLogged() throws Exception {
         Mockito.when(userService.getCurrentUser()).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/rating/activity/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get(URL))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.content().string("{\"status\":\"FAILED\",\"message\":\"Please login to perform this operation.\"}"));
     }
@@ -69,13 +73,13 @@ public class RatingRestControllerTest {
         double expectedRating = 5.0;
         int updateSuccess = 1;
         int rating = 5;
-        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "username", "pass", Collections.emptyList());
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
         Mockito.when(userService.getCurrentUser()).thenReturn(customUserDetails);
         Mockito.when(ratingService.editRateByUserId(ACTIVITY_ID, customUserDetails.getId(), rating)).thenReturn(updateSuccess);
         Mockito.when(ratingService.getRate(ACTIVITY_ID)).thenReturn(expectedRating);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/rating/activity/1")
-                .param("rating", String.valueOf(rating)))
+        mockMvc.perform(MockMvcRequestBuilders.post(URL)
+                .param(RATING_PARAM, String.valueOf(rating)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("{\"rating\":" + expectedRating + "}"));
     }
@@ -85,8 +89,8 @@ public class RatingRestControllerTest {
         int rating = 4;
         Mockito.when(userService.getCurrentUser()).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/rating/activity/1")
-                .param("rating", String.valueOf(rating)))
+        mockMvc.perform(MockMvcRequestBuilders.post(URL)
+                .param(RATING_PARAM, String.valueOf(rating)))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.content().string("{\"status\":\"FAILED\",\"message\":\"Please login to perform this operation.\"}"));
     }
@@ -95,12 +99,12 @@ public class RatingRestControllerTest {
     public void shouldReturnServerErrorOnUpdateIfEditFail() throws Exception {
         int updateFail = 0;
         int rating = 5;
-        CustomUserDetails customUserDetails = new CustomUserDetails(1L, "username", "pass", Collections.emptyList());
+        CustomUserDetails customUserDetails = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
         Mockito.when(userService.getCurrentUser()).thenReturn(customUserDetails);
         Mockito.when(ratingService.editRateByUserId(ACTIVITY_ID, customUserDetails.getId(), rating)).thenReturn(updateFail).thenThrow(ApiException.class);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/rating/activity/1")
-                .param("rating", String.valueOf(rating)))
+        mockMvc.perform(MockMvcRequestBuilders.post(URL)
+                .param(RATING_PARAM, String.valueOf(rating)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.content().string("{\"status\":\"FAILED\",\"message\":\"Something went wrong! Please try again.\"}"));
     }

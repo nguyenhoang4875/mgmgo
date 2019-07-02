@@ -23,6 +23,9 @@ import javax.validation.Valid;
 @RequestMapping("/activity")
 public class ActivityController {
 
+    private static final String ACTIVITY_INFO_ATTRIBUTE = "activityInfo";
+    private static final String ERROR_VIEW = "error";
+
     @Autowired
     private ActivityService activityService;
 
@@ -30,20 +33,20 @@ public class ActivityController {
     public String getActivity(Model model, @PathVariable("activityId") long activityId) {
         ActivityDetailDTO activityDetailDTO = activityService.findById(activityId);
         if (activityDetailDTO != null) {
-            model.addAttribute("activityInfo", activityDetailDTO);
+            model.addAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
             return "activity/detail";
         }
-        return "error";
+        return ERROR_VIEW;
     }
 
     @GetMapping("/update/{activityId}")
     public String getUpdateActivity(Model model, @PathVariable("activityId") long activityId) {
-        if (!model.containsAttribute("activityInfo")) {
+        if (!model.containsAttribute(ACTIVITY_INFO_ATTRIBUTE)) {
             ActivityDetailDTO activityDetailDTO = activityService.findById(activityId);
             if (activityDetailDTO == null) {
-                return "error";
+                return ERROR_VIEW;
             }
-            model.addAttribute("activityInfo", activityDetailDTO);
+            model.addAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
         }
         return "activity/update";
     }
@@ -57,20 +60,20 @@ public class ActivityController {
     }
 
     @PostMapping("/update/{activityId}")
-    public String updateActivity(@ModelAttribute("activityInfo") @Valid ActivityDetailDTO activityDetailDTO,
+    public String updateActivity(@ModelAttribute(ACTIVITY_INFO_ATTRIBUTE) @Valid ActivityDetailDTO activityDetailDTO,
                                  final BindingResult bindingResult,
                                  @PathVariable("activityId") long activityId,
                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("error", bindingResult.getFieldError().getDefaultMessage());
-            redirectAttributes.addFlashAttribute("activityInfo", activityDetailDTO);
+            redirectAttributes.addFlashAttribute(ERROR_VIEW, bindingResult.getFieldError().getDefaultMessage());
+            redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
             return "redirect:/activity/update/{activityId}";
         }
 
         int rowUpdate = 0;
         if (activityService.updateActivity(activityId, activityDetailDTO.getName(), activityDetailDTO.getDescription()) == rowUpdate) {
-            redirectAttributes.addFlashAttribute("error", "Can't update Activity. Try again!");
-            redirectAttributes.addFlashAttribute("activityInfo", activityDetailDTO);
+            redirectAttributes.addFlashAttribute(ERROR_VIEW, "Can't update Activity. Try again!");
+            redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
             return "redirect:/activity/update/{activityId}";
         } else {
             return "redirect:/activity/{activityId}";

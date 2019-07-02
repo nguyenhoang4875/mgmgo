@@ -51,7 +51,7 @@ public class QuoteRestControllerTest {
     public void shouldThrowExceptionIfResultNull() {
         Mockito.when(quoteService.getQuote()).thenReturn(null).thenThrow(ApiException.class);
 
-        QuoteDTO quoteDTO = quoteRestController.getQuote();
+        quoteRestController.getQuote();
     }
 
     @Test

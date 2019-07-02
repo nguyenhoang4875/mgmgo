@@ -5,7 +5,6 @@ import com.mgmtp.internship.experiences.model.tables.tables.records.RatingRecord
 import org.jooq.DSLContext;
 import org.jooq.Record1;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -39,7 +38,7 @@ public class RatingRepository {
                 .where(RATING.ACTIVITY_ID.eq(activityId))
                 .and(RATING.USER_ID.eq(userId)).fetchOne();
 
-        return rate == null ? 0 : rate.map(RateRecord -> rate.getValue());
+        return rate == null ? 0 : rate.map(rateRecord -> rate.getValue());
     }
 
     public int editRateByUserId(long activityId, long userId, int rate) {
