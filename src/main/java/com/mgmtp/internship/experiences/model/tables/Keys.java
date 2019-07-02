@@ -53,6 +53,8 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ActivityRecord, UserRecord> ACTIVITY__FK_ACTIVITY_USER_CREATED_BY = ForeignKeys0.ACTIVITY__FK_ACTIVITY_USER_CREATED_BY;
+    public static final ForeignKey<ActivityRecord, UserRecord> ACTIVITY__FK_ACTIVITY_USER_UPDATED_BY = ForeignKeys0.ACTIVITY__FK_ACTIVITY_USER_UPDATED_BY;
     public static final ForeignKey<RatingRecord, ActivityRecord> RATING__FK_RATING_ACTIVITY = ForeignKeys0.RATING__FK_RATING_ACTIVITY;
     public static final ForeignKey<RatingRecord, UserRecord> RATING__FK_RATING_USER = ForeignKeys0.RATING__FK_RATING_USER;
 
@@ -73,6 +75,8 @@ public class Keys {
     }
 
     private static class ForeignKeys0 {
+        public static final ForeignKey<ActivityRecord, UserRecord> ACTIVITY__FK_ACTIVITY_USER_CREATED_BY = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_USER, Activity.ACTIVITY, "activity__fk_activity_user_created_by", Activity.ACTIVITY.CREATED_BY_USER_ID);
+        public static final ForeignKey<ActivityRecord, UserRecord> ACTIVITY__FK_ACTIVITY_USER_UPDATED_BY = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_USER, Activity.ACTIVITY, "activity__fk_activity_user_updated_by", Activity.ACTIVITY.UPDATED_BY_USER_ID);
         public static final ForeignKey<RatingRecord, ActivityRecord> RATING__FK_RATING_ACTIVITY = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_ACTIVITY, Rating.RATING, "rating__fk_rating_activity", Rating.RATING.ACTIVITY_ID);
         public static final ForeignKey<RatingRecord, UserRecord> RATING__FK_RATING_USER = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_USER, Rating.RATING, "rating__fk_rating_user", Rating.RATING.USER_ID);
     }
