@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en" xmlns:th="www.thymeLeaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default-layout}">
+<head>
+    <title>mgm go</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/home/index.css}"/>
+
+</head>
+<body>
+
+<div layout:fragment="main-content">
+    <div id="action-bar" class="col-12 px-0">
+        <a th:href="@{/}"><i class="fa fa-arrow-left"></i> Back to home</a>
+    </div>
+    </br>
+    <h6>[[${activities.size()}]] result <strong class = "text-primary" th:text="${#strings.isEmpty(keySearch)} ? '' :  '&quot;' + ${keySearch} + '&quot;'" ></strong> for activities </h6>
+    <div th:if="${not #lists.isEmpty(activities)}" class="activities" id="activities">
+        <div class="activity-item" th:each="item: ${activities}">
+            <a th:href="@{/activity/{id}(id=${item.id})}" class="activity-name" th:text="${item.name}"></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

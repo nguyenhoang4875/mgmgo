@@ -22,4 +22,6 @@ public interface ActivityService {
     boolean checkExistName(String activityName);
 
     boolean checkExistNameForUpdate(long activityId, String activityName);
+
+    List<ActivityDTO> search(String text);
 }

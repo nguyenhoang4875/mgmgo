@@ -1,0 +1,19 @@
+.border-primary{
+    border-right: none;
+    border-color: #6c757d !important;
+    border-left-color: #6c757d;
+    border-top-color: #6c757d;
+    border-bottom-color:#6c757d;
+
+
+}
+.btn-outline-secondary{
+    border-left: none;
+    border-color: #6c757d;
+
+}
+
+.btn-outline-secondary:hover {
+   background-color: white;
+    color:#6c757d;
+}
