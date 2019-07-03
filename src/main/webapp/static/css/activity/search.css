@@ -1,19 +1,32 @@
-.border-primary{
-    border-right: none;
-    border-color: #6c757d !important;
-    border-left-color: #6c757d;
-    border-top-color: #6c757d;
-    border-bottom-color:#6c757d;
 
-
-}
-.btn-outline-secondary{
-    border-left: none;
-    border-color: #6c757d;
-
+.form-control:focus {
+    box-shadow: none;
 }
 
-.btn-outline-secondary:hover {
-   background-color: white;
-    color:#6c757d;
+
+.input-group #searchInfor {
+    border-radius: .25rem;
+}
+
+.input-group-append.inside {
+    position: absolute;
+    right: 0;
+}
+
+.input-group-append.inside .btn-outline-none {
+    border: none;
+    z-index: 4;
+    background-color: transparent;
+    color: #6c757d;
+}
+
+.input-group-append.inside .btn-outline-none:hover {
+    background-color: transparent;
+    color: #6c757d;
+}
+
+.input-group-append.inside .btn-outline-none:focus, .btn-outline-none:active, .btn-outline-none:active:focus {
+    box-shadow: none;
+    background: transparent;
+    color: #6c757d;
 }

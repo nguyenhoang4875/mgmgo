@@ -57,9 +57,4 @@ public class ActivityServiceImpl implements ActivityService {
     public List<ActivityDTO> search(String text) {
         return activityRepository.search(text);
     }
-
-    @Override
-    public List<ActivityDTO> search(String text) {
-        return activityRepository.search(text);
-    }
 }

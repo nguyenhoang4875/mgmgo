@@ -15,9 +15,13 @@ public class SearchController {
     private ActivityService activityService;
 
     @GetMapping
-    public String search(Model model, @RequestParam(name = "searchInfor", required = false) String searchInfor) {
-        model.addAttribute("keySearch", searchInfor.trim());
-        model.addAttribute("activities", activityService.search(searchInfor));
+    public String search(Model model, @RequestParam(name = "searchInfor", required = false, defaultValue = "") String searchInfor) {
+        if (searchInfor.isEmpty()) {
+            model.addAttribute("activities", activityService.findAll());
+        } else {
+            model.addAttribute("keySearch", searchInfor.trim());
+            model.addAttribute("activities", activityService.search(searchInfor));
+        }
         return "search";
     }
 }

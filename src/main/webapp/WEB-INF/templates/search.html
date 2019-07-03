@@ -15,7 +15,7 @@
         <a th:href="@{/}"><i class="fa fa-arrow-left"></i> Back to home</a>
     </div>
     </br>
-    <h6>[[${activities.size()}]] result <strong class = "text-primary" th:text="${#strings.isEmpty(keySearch)} ? '' :  '&quot;' + ${keySearch} + '&quot;'" ></strong> for activities </h6>
+    <h6><span th:text="${activities.size()}">1</span> result(s) <strong class = "text-primary" th:text="${#strings.isEmpty(keySearch)} ? '' :  '&quot;' + ${keySearch} + '&quot;'" ></strong> for activities </h6>
     <div th:if="${not #lists.isEmpty(activities)}" class="activities" id="activities">
         <div class="activity-item" th:each="item: ${activities}">
             <a th:href="@{/activity/{id}(id=${item.id})}" class="activity-name" th:text="${item.name}"></a>

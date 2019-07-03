@@ -950,16 +950,22 @@ and open the template in the editor.
                         <p>- Search input has placeholder (Ex: Search for places,...) and on the left side </p>
                     </li>
                 </ul>
-                <div class='section-preview shadow-sm'>
-                    <form class="form-inline">
-                        <div class="form-group mx-sm-2 mb-2">
-                            <label for="inputPassword2" class="sr-only">Search for places</label>
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="Search for places">
-                        </div>
-                        <button type="button" class="btn btn-primary mb-2"><i class='fa fa-search'></i></button>
-                    </form>
+                <!--form search-->
+                <div class="section-preview ">
+                    <div class="input-group ">
+                        <input type="text" class="form-control "
+                               id="searchInfor"
+                               name="searchInfor"
+                               placeholder="Search for activities">
+                        <span class="input-group-append inside">
+                              <button class="btn btn-outline-none"
+                                      type="submit" id="search">
+                                <i class="fa fa-search"></i>
+                              </button>
+                        </span>
+                    </div>
                 </div>
-                <hr class="mt-5" />
+                <hr class="mt-5"/>
                 <!-- end search form-->
 
                 <!-- form -->
