@@ -5,9 +5,11 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
+import com.mgmtp.internship.experiences.model.tables.tables.Image;
 import com.mgmtp.internship.experiences.model.tables.tables.Rating;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 import com.mgmtp.internship.experiences.model.tables.tables.records.ActivityRecord;
+import com.mgmtp.internship.experiences.model.tables.tables.records.ImageRecord;
 import com.mgmtp.internship.experiences.model.tables.tables.records.RatingRecord;
 import com.mgmtp.internship.experiences.model.tables.tables.records.UserRecord;
 
@@ -38,6 +40,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<ActivityRecord, Long> IDENTITY_ACTIVITY = Identities0.IDENTITY_ACTIVITY;
+    public static final Identity<ImageRecord, Long> IDENTITY_IMAGE = Identities0.IDENTITY_IMAGE;
     public static final Identity<RatingRecord, Long> IDENTITY_RATING = Identities0.IDENTITY_RATING;
     public static final Identity<UserRecord, Long> IDENTITY_USER = Identities0.IDENTITY_USER;
 
@@ -46,6 +49,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<ActivityRecord> PK_ACTIVITY = UniqueKeys0.PK_ACTIVITY;
+    public static final UniqueKey<ImageRecord> PK_IMAGE = UniqueKeys0.PK_IMAGE;
     public static final UniqueKey<RatingRecord> PK_RATING = UniqueKeys0.PK_RATING;
     public static final UniqueKey<UserRecord> PK_USER = UniqueKeys0.PK_USER;
 
@@ -55,6 +59,7 @@ public class Keys {
 
     public static final ForeignKey<RatingRecord, ActivityRecord> RATING__FK_RATING_ACTIVITY = ForeignKeys0.RATING__FK_RATING_ACTIVITY;
     public static final ForeignKey<RatingRecord, UserRecord> RATING__FK_RATING_USER = ForeignKeys0.RATING__FK_RATING_USER;
+    public static final ForeignKey<UserRecord, ImageRecord> USER__FK_USER_IMAGE = ForeignKeys0.USER__FK_USER_IMAGE;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -62,12 +67,14 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<ActivityRecord, Long> IDENTITY_ACTIVITY = Internal.createIdentity(Activity.ACTIVITY, Activity.ACTIVITY.ID);
+        public static Identity<ImageRecord, Long> IDENTITY_IMAGE = Internal.createIdentity(Image.IMAGE, Image.IMAGE.ID);
         public static Identity<RatingRecord, Long> IDENTITY_RATING = Internal.createIdentity(Rating.RATING, Rating.RATING.ID);
         public static Identity<UserRecord, Long> IDENTITY_USER = Internal.createIdentity(User.USER, User.USER.ID);
     }
 
     private static class UniqueKeys0 {
         public static final UniqueKey<ActivityRecord> PK_ACTIVITY = Internal.createUniqueKey(Activity.ACTIVITY, "pk_activity", Activity.ACTIVITY.ID);
+        public static final UniqueKey<ImageRecord> PK_IMAGE = Internal.createUniqueKey(Image.IMAGE, "pk_image", Image.IMAGE.ID);
         public static final UniqueKey<RatingRecord> PK_RATING = Internal.createUniqueKey(Rating.RATING, "pk_rating", Rating.RATING.ID);
         public static final UniqueKey<UserRecord> PK_USER = Internal.createUniqueKey(User.USER, "pk_user", User.USER.ID);
     }
@@ -75,5 +82,6 @@ public class Keys {
     private static class ForeignKeys0 {
         public static final ForeignKey<RatingRecord, ActivityRecord> RATING__FK_RATING_ACTIVITY = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_ACTIVITY, Rating.RATING, "rating__fk_rating_activity", Rating.RATING.ACTIVITY_ID);
         public static final ForeignKey<RatingRecord, UserRecord> RATING__FK_RATING_USER = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_USER, Rating.RATING, "rating__fk_rating_user", Rating.RATING.USER_ID);
+        public static final ForeignKey<UserRecord, ImageRecord> USER__FK_USER_IMAGE = Internal.createForeignKey(com.mgmtp.internship.experiences.model.tables.Keys.PK_IMAGE, User.USER, "user__fk_user_image", User.USER.IMAGE_ID);
     }
 }

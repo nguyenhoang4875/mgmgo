@@ -1,6 +1,7 @@
 package com.mgmtp.internship.experiences.services.impl;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
+import com.mgmtp.internship.experiences.dto.UserProfileDTO;
 import com.mgmtp.internship.experiences.model.tables.tables.records.UserRecord;
 import com.mgmtp.internship.experiences.repositories.UserRepository;
 import org.junit.Assert;
@@ -19,6 +20,8 @@ import java.util.Collections;
 public class UserDetailsServiceImplTest {
     private static final long EXPECTEDID = 1L;
     private static final String EXPECTEDUSERNAME = "username";
+    private static final String EXPECTEDDISPLAYNAME = "username";
+    private static final long EXPECTEDIMAGEID = 1;
 
     @Mock
     private UserRepository userRepository;
@@ -28,8 +31,8 @@ public class UserDetailsServiceImplTest {
 
     @Test
     public void shouldReturnUserDetails() {
-        UserRecord expectedUserRecord = new UserRecord(EXPECTEDID, EXPECTEDUSERNAME, Mockito.anyString());
-        UserDetails expectedUserDetails = new CustomUserDetails(expectedUserRecord.getId(), expectedUserRecord.getUsername(), expectedUserRecord.getPassword(), Collections.emptyList());
+        UserRecord expectedUserRecord = new UserRecord(EXPECTEDID, EXPECTEDUSERNAME, EXPECTEDDISPLAYNAME, Mockito.anyString(), EXPECTEDIMAGEID);
+        UserDetails expectedUserDetails = new CustomUserDetails(expectedUserRecord.getId(), new UserProfileDTO(expectedUserRecord.getImageId(), expectedUserRecord.getDisplayName()), expectedUserRecord.getUsername(), expectedUserRecord.getPassword(), Collections.emptyList());
         Mockito.when(userRepository.findUserByUsername(EXPECTEDUSERNAME)).thenReturn(expectedUserRecord);
 
         UserDetails actualUserDetails = userDetailsService.loadUserByUsername(EXPECTEDUSERNAME);

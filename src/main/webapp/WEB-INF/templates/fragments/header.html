@@ -17,8 +17,12 @@
                         <a class="nav-link" th:href="@{/login}" th:text="Login" sec:authorize="!isAuthenticated()"></a>
                         <div class="nav-link dropdown" sec:authorize="isAuthenticated()">
                             <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown"
-                               sec:authentication="name" href="#"> </a>
+                               href="#">
+                                <img id="user-thumbnail" class="rounded img-thumbnail" width="35" height="35" th:src="${#authentication.principal.userProfile.imageId!=null}?@{/api/image/}+${#authentication.principal.userProfile.imageId}:@{/static/images/default_profile_picture.png}" th:alt="${#authentication.name}">
+
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="user_dropdown">
+                                <a th:href="@{/profile}" class="dropdown-item">My profile</a>
                                 <a th:href="@{/logout}" class="dropdown-item">Logout</a>
                             </div>
                         </div>

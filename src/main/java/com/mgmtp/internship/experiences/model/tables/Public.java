@@ -5,6 +5,7 @@ package com.mgmtp.internship.experiences.model.tables;
 
 
 import com.mgmtp.internship.experiences.model.tables.tables.Activity;
+import com.mgmtp.internship.experiences.model.tables.tables.Image;
 import com.mgmtp.internship.experiences.model.tables.tables.Rating;
 import com.mgmtp.internship.experiences.model.tables.tables.User;
 
@@ -33,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -639807349;
+    private static final long serialVersionUID = 212676137;
 
     /**
      * The reference instance of <code>public</code>
@@ -44,6 +45,11 @@ public class Public extends SchemaImpl {
      * activity table
      */
     public final Activity ACTIVITY = com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
+
+    /**
+     * image table
+     */
+    public final Image IMAGE = com.mgmtp.internship.experiences.model.tables.tables.Image.IMAGE;
 
     /**
      * rating table
@@ -81,6 +87,7 @@ public class Public extends SchemaImpl {
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
             Sequences.ACTIVITY_ID_SEQ,
+            Sequences.IMAGE_ID_SEQ,
             Sequences.RATING_ID_SEQ,
             Sequences.USER_ID_SEQ);
     }
@@ -95,6 +102,7 @@ public class Public extends SchemaImpl {
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
             Activity.ACTIVITY,
+            Image.IMAGE,
             Rating.RATING,
             User.USER);
     }

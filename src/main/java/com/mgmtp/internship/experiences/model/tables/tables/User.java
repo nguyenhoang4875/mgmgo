@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = 2110699468;
+    private static final long serialVersionUID = 238529545;
 
     /**
      * The reference instance of <code>public.user</code>
@@ -67,9 +67,19 @@ public class User extends TableImpl<UserRecord> {
     public final TableField<UserRecord, String> USERNAME = createField("username", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
+     * The column <code>public.user.display_name</code>.
+     */
+    public final TableField<UserRecord, String> DISPLAY_NAME = createField("display_name", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
+
+    /**
      * The column <code>public.user.password</code>.
      */
     public final TableField<UserRecord, String> PASSWORD = createField("password", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+
+    /**
+     * The column <code>public.user.image_id</code>.
+     */
+    public final TableField<UserRecord, Long> IMAGE_ID = createField("image_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
      * Create a <code>public.user</code> table reference
@@ -142,6 +152,18 @@ public class User extends TableImpl<UserRecord> {
     @Override
     public List<UniqueKey<UserRecord>> getKeys() {
         return Arrays.<UniqueKey<UserRecord>>asList(Keys.PK_USER);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<UserRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<UserRecord, ?>>asList(Keys.USER__FK_USER_IMAGE);
+    }
+
+    public Image image() {
+        return new Image(this, Keys.USER__FK_USER_IMAGE);
     }
 
     /**
