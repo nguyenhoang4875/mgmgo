@@ -95,5 +95,24 @@ public class UserServiceImplTest {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
+    @Test
+    public void shouldReturnFalseIfDisplayNameNotExit() {
+        boolean expectedResult = false;
+        when(userRepository.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), USER_ID)).thenReturn(false);
+
+        boolean actualResult = userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), USER_ID);
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void shouldReturnTrueIfDisplayNameExit() {
+        boolean expectedResult = true;
+        when(userRepository.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), USER_ID)).thenReturn(true);
+
+        boolean actualResult = userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), USER_ID);
+
+        Assert.assertEquals(expectedResult, actualResult);
+    }
 }
 

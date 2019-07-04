@@ -3,6 +3,7 @@ package com.mgmtp.internship.experiences.controllers.app;
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
 import com.mgmtp.internship.experiences.dto.UserProfileDTO;
 import com.mgmtp.internship.experiences.services.UserService;
+import com.mgmtp.internship.experiences.utils.StringReplaceWhitespaceEditor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -42,10 +43,7 @@ public class UserProfileController {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-
-        dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+        dataBinder.registerCustomEditor(String.class, new StringReplaceWhitespaceEditor(true));
     }
 
     @PostMapping()
@@ -55,7 +53,7 @@ public class UserProfileController {
             return "redirect:/login";
         }
         if (!bindingResult.hasErrors()) {
-            if (userService.checkExitDisplayName(profile.getDisplayName())) {
+            if (userService.checkExitDisplayName(profile.getDisplayName(), user.getId())) {
                 bindingResult.rejectValue("displayName", "error." + USER_PROFILE_MODEL_TAG, "This display name is already in use.");
             } else if (userService.updateProfile(user.getId(), profile)) {
                 model.addAttribute("success", "Update profile success.");

@@ -13,5 +13,5 @@ public interface UserService {
 
     boolean updateProfile(long userId, UserProfileDTO profile);
 
-    boolean checkExitDisplayName(String displayName);
+    boolean checkExitDisplayName(String displayName, long id);
 }

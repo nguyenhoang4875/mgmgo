@@ -92,7 +92,7 @@ public class UserProfileControllerTest {
     @Test
     public void shouldShowProfilePageIfUpdateProfileSuccess() {
         when(userService.getCurrentUser()).thenReturn(CUSTOM_USER_DETAILS);
-        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName())).thenReturn(false);
+        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), CUSTOM_USER_DETAILS.getId())).thenReturn(false);
         when(userService.updateProfile(CUSTOM_USER_DETAILS.getId(), USER_PROFILE_DTO)).thenReturn(true);
 
         try {
@@ -111,7 +111,7 @@ public class UserProfileControllerTest {
     @Test
     public void shouldShowErrorOnProfilePageIfUpdateProfileFailed() {
         when(userService.getCurrentUser()).thenReturn(CUSTOM_USER_DETAILS);
-        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName())).thenReturn(false);
+        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), CUSTOM_USER_DETAILS.getId())).thenReturn(false);
         when(userService.updateProfile(CUSTOM_USER_DETAILS.getId(), USER_PROFILE_DTO)).thenReturn(false);
 
         try {
@@ -130,7 +130,7 @@ public class UserProfileControllerTest {
     @Test
     public void shouldShowErrorOnProfilePageIfDisplayNameAlready() {
         when(userService.getCurrentUser()).thenReturn(CUSTOM_USER_DETAILS);
-        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName())).thenReturn(true);
+        when(userService.checkExitDisplayName(USER_PROFILE_DTO.getDisplayName(), CUSTOM_USER_DETAILS.getId())).thenReturn(true);
 
         try {
             mockMvc.perform(post(PROFILE_URL)

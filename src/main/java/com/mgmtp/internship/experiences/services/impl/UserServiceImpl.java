@@ -44,8 +44,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkExitDisplayName(String displayName) {
-        return userRepository.checkExitDisplayName(displayName);
+    public boolean checkExitDisplayName(String displayName, long id) {
+        return userRepository.checkExitDisplayName(displayName, id);
     }
-
 }

@@ -39,9 +39,10 @@ public class UserRepository {
                 .execute() == 1;
     }
 
-    public boolean checkExitDisplayName(String displayName) {
+    public boolean checkExitDisplayName(String displayName, long id) {
         return dslContext.fetchExists(dslContext.selectFrom(USER)
-                .where(USER.DISPLAY_NAME.likeIgnoreCase(displayName)));
+                .where(USER.DISPLAY_NAME.likeIgnoreCase(displayName)
+                .and(USER.ID.notEqual(id))));
     }
 }
 
