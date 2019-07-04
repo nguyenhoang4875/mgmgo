@@ -52,6 +52,7 @@ public class Keys {
     public static final UniqueKey<ImageRecord> PK_IMAGE = UniqueKeys0.PK_IMAGE;
     public static final UniqueKey<RatingRecord> PK_RATING = UniqueKeys0.PK_RATING;
     public static final UniqueKey<UserRecord> PK_USER = UniqueKeys0.PK_USER;
+    public static final UniqueKey<UserRecord> USER_DISPLAY_NAME_KEY = UniqueKeys0.USER_DISPLAY_NAME_KEY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -79,6 +80,7 @@ public class Keys {
         public static final UniqueKey<ImageRecord> PK_IMAGE = Internal.createUniqueKey(Image.IMAGE, "pk_image", Image.IMAGE.ID);
         public static final UniqueKey<RatingRecord> PK_RATING = Internal.createUniqueKey(Rating.RATING, "pk_rating", Rating.RATING.ID);
         public static final UniqueKey<UserRecord> PK_USER = Internal.createUniqueKey(User.USER, "pk_user", User.USER.ID);
+        public static final UniqueKey<UserRecord> USER_DISPLAY_NAME_KEY = Internal.createUniqueKey(User.USER, "user_display_name_key", User.USER.DISPLAY_NAME);
     }
 
     private static class ForeignKeys0 {

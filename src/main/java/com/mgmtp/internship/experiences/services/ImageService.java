@@ -1,8 +1,8 @@
 package com.mgmtp.internship.experiences.services;
 
 import com.mgmtp.internship.experiences.dto.ImageDTO;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.InputStream;
 
