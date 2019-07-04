@@ -32,7 +32,17 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public int updateActivity(long activityId, String newName, String newDescription) {
-        return activityRepository.updateActivity(activityId, newName, newDescription);
+    public int update(ActivityDetailDTO activityDetailDTO) {
+        return activityRepository.update(activityDetailDTO);
+    }
+
+    @Override
+    public int create(ActivityDetailDTO activityDetailDTO) {
+        return activityRepository.create(activityDetailDTO);
+    }
+
+    @Override
+    public boolean checkExistName(String activityName) {
+        return activityRepository.checkExistName(activityName);
     }
 }

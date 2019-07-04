@@ -3,6 +3,7 @@ package com.mgmtp.internship.experiences.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * Activity detail.
@@ -16,15 +17,20 @@ public class ActivityDetailDTO {
 
     @NotNull(message = "Name may not be null")
     @NotBlank(message = "Name may not be blank")
-    @Size(max = 100, message = "You can't not write more than 100 characters")
+    @Size(max = 100, message = "You can not write more than 100 characters for name")
     private String name;
 
 
     @NotNull(message = "Description may not be null")
     @NotBlank(message = "Description may not be blank")
-    @Size(max = 100000, message = "You can't not write more than 10000 characters")
+    @Size(max = 100000, message = "You can not write more than 10000 characters for description")
     private String description;
     private double rating;
+
+
+
+    private long createdByUserId;
+    private long updatedByUserId;
 
     public ActivityDetailDTO() {
 
@@ -69,4 +75,33 @@ public class ActivityDetailDTO {
         this.rating = rating;
     }
 
+    public long getCreatedByUserId() {
+        return createdByUserId;
+    }
+
+    public void setCreatedByUserId(long createdByUserId) {
+        this.createdByUserId = createdByUserId;
+    }
+
+    public long getUpdatedByUserId() {
+        return updatedByUserId;
+    }
+
+    public void setUpdatedByUserId(long updatedByUserId) {
+        this.updatedByUserId = updatedByUserId;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ActivityDetailDTO that = (ActivityDetailDTO) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

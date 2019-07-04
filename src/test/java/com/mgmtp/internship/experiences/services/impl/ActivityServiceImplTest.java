@@ -61,16 +61,47 @@ public class ActivityServiceImplTest {
     @Test
     public void shouldReturn1IfUpdateSuccess() {
         final int UPDATE_SUCCESS = 1;
-        Mockito.when(activityRepository.updateActivity(ACTIVITY_ID, EXPECTED_ACTIVITY_DETAIL_DTO.getName(), EXPECTED_ACTIVITY_DETAIL_DTO.getDescription())).thenReturn(UPDATE_SUCCESS);
+        Mockito.when(activityRepository.update(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(UPDATE_SUCCESS);
 
-        Assert.assertEquals(UPDATE_SUCCESS, activityService.updateActivity(ACTIVITY_ID, EXPECTED_ACTIVITY_DETAIL_DTO.getName(), EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()));
+        Assert.assertEquals(UPDATE_SUCCESS, activityService.update(EXPECTED_ACTIVITY_DETAIL_DTO));
     }
 
     @Test
     public void shouldReturn0IfUpdateFailed() {
         final int UPDATE_FAIL = 0;
-        Mockito.when(activityRepository.updateActivity(ACTIVITY_ID, EXPECTED_ACTIVITY_DETAIL_DTO.getName(), EXPECTED_ACTIVITY_DETAIL_DTO.getDescription())).thenReturn(UPDATE_FAIL);
+        EXPECTED_ACTIVITY_DETAIL_DTO.setUpdatedByUserId(1);
+        Mockito.when(activityRepository.update(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(UPDATE_FAIL);
 
-        Assert.assertEquals(UPDATE_FAIL, activityService.updateActivity(ACTIVITY_ID, EXPECTED_ACTIVITY_DETAIL_DTO.getName(), EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()));
+        Assert.assertEquals(UPDATE_FAIL, activityService.update(EXPECTED_ACTIVITY_DETAIL_DTO));
+    }
+
+    @Test
+    public void shouldReturn1IfInsertSuccess(){
+        final int INSERT_SUCCESS = 1;
+        Mockito.when(activityRepository.create(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(INSERT_SUCCESS);
+
+        Assert.assertEquals(INSERT_SUCCESS, activityService.create(EXPECTED_ACTIVITY_DETAIL_DTO));
+    }
+
+    @Test
+    public void shouldReturn0IfInsertFailed(){
+        final int INSERT_SUCCESS = 0;
+        Mockito.when(activityRepository.create(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(INSERT_SUCCESS);
+
+        Assert.assertEquals(INSERT_SUCCESS, activityService.create(EXPECTED_ACTIVITY_DETAIL_DTO));
+    }
+
+    @Test
+    public void shouldReturnTrueIfNameExist(){
+        Mockito.when(activityRepository.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
+
+        Assert.assertEquals(true, activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName()));
+    }
+
+    @Test
+    public void shouldReturnFalseIfNameExist(){
+        Mockito.when(activityRepository.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(false);
+
+        Assert.assertEquals(false, activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName()));
     }
 }
