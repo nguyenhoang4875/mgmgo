@@ -27,6 +27,9 @@ public class ActivityController {
 
     private static final String ACTIVITY_INFO_ATTRIBUTE = "activityInfo";
     private static final String ERROR_VIEW = "error";
+    private static final String REDIRECT_UPDATE_URL = "redirect:/activity/update/";
+    private static final String REDIRECT_CREATE_URL = "redirect:/activity/create";
+
 
     @Autowired
     private ActivityService activityService;
@@ -69,31 +72,30 @@ public class ActivityController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute(ERROR_VIEW, bindingResult.getFieldError().getDefaultMessage());
             redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-            return "redirect:/activity/update/" + activityDetailDTO.getId();
+            return REDIRECT_UPDATE_URL + activityDetailDTO.getId();
         }
 
         try {
             CustomUserDetails user = userService.getCurrentUser();
-            System.out.println(activityDetailDTO.getName());
             activityDetailDTO.setUpdatedByUserId(user.getId());
             if (activityService.checkExistName(activityDetailDTO.getName())) {
                 redirectAttributes.addFlashAttribute(ERROR_VIEW, "This name already exists");
                 redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-                return "redirect:/activity/update/" + activityDetailDTO.getId();
+                return REDIRECT_UPDATE_URL + activityDetailDTO.getId();
             }
             activityService.update(activityDetailDTO);
             return "redirect:/activity/" + activityDetailDTO.getId();
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute(ERROR_VIEW, "Can't update Activity. Try again!");
             redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-            return "redirect:/activity/update/" + activityDetailDTO.getId();
+            return REDIRECT_UPDATE_URL + activityDetailDTO.getId();
         }
     }
 
     @GetMapping("/create")
     public String getCreateActivity(Model model) {
-        if (!model.containsAttribute("activityInfo")) {
-            model.addAttribute("activityInfo", new ActivityDetailDTO());
+        if (!model.containsAttribute(ACTIVITY_INFO_ATTRIBUTE)) {
+            model.addAttribute(ACTIVITY_INFO_ATTRIBUTE, new ActivityDetailDTO());
         }
         return "activity/create";
     }
@@ -105,7 +107,7 @@ public class ActivityController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute(ERROR_VIEW, bindingResult.getFieldError().getDefaultMessage());
             redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-            return "redirect:/activity/create";
+            return REDIRECT_CREATE_URL;
         }
         try {
             CustomUserDetails user = userService.getCurrentUser();
@@ -113,7 +115,7 @@ public class ActivityController {
             if (activityService.checkExistName(activityDetailDTO.getName())) {
                 redirectAttributes.addFlashAttribute(ERROR_VIEW, "This name already exists");
                 redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-                return "redirect:/activity/create";
+                return REDIRECT_CREATE_URL;
             }
             activityService.create(activityDetailDTO);
             return "redirect:/";
@@ -121,7 +123,7 @@ public class ActivityController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute(ERROR_VIEW, "Can't create Activity. Try again!");
             redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
-            return "redirect:/activity/create";
+            return REDIRECT_CREATE_URL;
         }
     }
 

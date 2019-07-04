@@ -11,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -30,12 +32,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(MockitoJUnitRunner.class)
 public class ActivityControllerTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityControllerTest.class);
     private static final String ACTIVITY_INFO_ATTRIBUTE = "activityInfo";
     private static final String USERNAME = "username";
     private static final long ACTIVITY_ID = 1;
+    private static final String ERROR_ATTRIBUTE = "error";
+    private static final String UPDATE_URL = "/activity/update";
+    private static final String CREATE_URL = "/activity/create";
     private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "name", "des", 5);
     private static final CustomUserDetails EXPECTED_CUSTOM_USER_DETAIL = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
-
 
     private MockMvc mockMvc;
 
@@ -55,7 +60,7 @@ public class ActivityControllerTest {
 
     @Test
     public void shouldGetActivityShowOnActivityPage() {
-        Mockito.when(activityService.findById(ACTIVITY_ID)).thenReturn(EXPECTED_ACTIVITY_DETAIL_DTO);
+            Mockito.when(activityService.findById(ACTIVITY_ID)).thenReturn(EXPECTED_ACTIVITY_DETAIL_DTO);
 
         try {
             mockMvc.perform(get("/activity/1"))
@@ -63,20 +68,20 @@ public class ActivityControllerTest {
                     .andExpect(model().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("activity/detail"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
     @Test
     public void shouldShowErrorPageIfWrongActivityId() {
         Mockito.when(activityService.findById(ACTIVITY_ID)).thenReturn(null);
-
+        final String errorPageName = "error";
         try {
             mockMvc.perform(get("/activity/1"))
                     .andExpect(status().isOk())
-                    .andExpect(view().name("error"));
+                    .andExpect(view().name(errorPageName));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -90,7 +95,7 @@ public class ActivityControllerTest {
                     .andExpect(model().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("activity/update"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -102,7 +107,7 @@ public class ActivityControllerTest {
         Mockito.when(activityService.update(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(updateSuccess);
 
         try {
-            mockMvc.perform(post("/activity/update")
+            mockMvc.perform(post(UPDATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
@@ -111,7 +116,7 @@ public class ActivityControllerTest {
                     .andExpect(view().name("redirect:/activity/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()))
                     .andExpect(redirectedUrl("/activity/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -122,18 +127,18 @@ public class ActivityControllerTest {
         Mockito.when(activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
 
         try {
-            mockMvc.perform(post("/activity/update")
+            mockMvc.perform(post(UPDATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(flash().attribute("error", "This name already exists"))
+                    .andExpect(flash().attribute(ERROR_ATTRIBUTE, "This name already exists"))
                     .andExpect(flash().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("redirect:/activity/update/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()))
                     .andExpect(redirectedUrl("/activity/update/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -142,30 +147,30 @@ public class ActivityControllerTest {
         Mockito.when(userService.getCurrentUser()).thenReturn(EXPECTED_CUSTOM_USER_DETAIL);
         Mockito.when(activityService.update(EXPECTED_ACTIVITY_DETAIL_DTO)).thenThrow(DataIntegrityViolationException.class);
         try {
-            mockMvc.perform(post("/activity/update")
+            mockMvc.perform(post(UPDATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(flash().attribute("error", "Can't update Activity. Try again!"))
+                    .andExpect(flash().attribute(ERROR_ATTRIBUTE, "Can't update Activity. Try again!"))
                     .andExpect(flash().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("redirect:/activity/update/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()))
                     .andExpect(redirectedUrl("/activity/update/" + EXPECTED_ACTIVITY_DETAIL_DTO.getId()));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
     @Test
     public void shouldShowCreatePage() {
         try {
-            mockMvc.perform(get("/activity/create"))
+            mockMvc.perform(get(CREATE_URL))
                     .andExpect(status().isOk())
                     .andExpect(model().attribute(ACTIVITY_INFO_ATTRIBUTE, new ActivityDetailDTO()))
                     .andExpect(view().name("activity/create"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -178,7 +183,7 @@ public class ActivityControllerTest {
         Mockito.when(activityService.create(EXPECTED_ACTIVITY_DETAIL_DTO)).thenReturn(insertSuccess);
 
         try {
-            mockMvc.perform(post("/activity/create")
+            mockMvc.perform(post(CREATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
@@ -187,7 +192,7 @@ public class ActivityControllerTest {
                     .andExpect(view().name("redirect:/"))
                     .andExpect(redirectedUrl("/"));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
     }
@@ -199,18 +204,18 @@ public class ActivityControllerTest {
         Mockito.when(activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
 
         try {
-            mockMvc.perform(post("/activity/create")
+            mockMvc.perform(post(CREATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(flash().attribute("error", "This name already exists"))
+                    .andExpect(flash().attribute(ERROR_ATTRIBUTE, "This name already exists"))
                     .andExpect(flash().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("redirect:/activity/create"))
-                    .andExpect(redirectedUrl("/activity/create"));
+                    .andExpect(redirectedUrl(CREATE_URL));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -219,18 +224,18 @@ public class ActivityControllerTest {
         Mockito.when(userService.getCurrentUser()).thenReturn(EXPECTED_CUSTOM_USER_DETAIL);
         Mockito.when(activityService.create(EXPECTED_ACTIVITY_DETAIL_DTO)).thenThrow(DataIntegrityViolationException.class);
         try {
-            mockMvc.perform(post("/activity/create")
+            mockMvc.perform(post(CREATE_URL)
                     .param("id", ACTIVITY_ID + "")
                     .param("name", EXPECTED_ACTIVITY_DETAIL_DTO.getName())
                     .param("description", EXPECTED_ACTIVITY_DETAIL_DTO.getDescription()))
                     .andDo(MockMvcResultHandlers.print())
                     .andExpect(status().is3xxRedirection())
-                    .andExpect(flash().attribute("error", "Can't create Activity. Try again!"))
+                    .andExpect(flash().attribute(ERROR_ATTRIBUTE, "Can't create Activity. Try again!"))
                     .andExpect(flash().attribute(ACTIVITY_INFO_ATTRIBUTE, EXPECTED_ACTIVITY_DETAIL_DTO))
                     .andExpect(view().name("redirect:/activity/create"))
-                    .andExpect(redirectedUrl("/activity/create"));
+                    .andExpect(redirectedUrl(CREATE_URL));
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
