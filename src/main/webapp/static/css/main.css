@@ -74,29 +74,36 @@ body {
 }
 
 .text-primary {
-    color: #1d76bb !important;
+    color: #1d76bb;
 }
 
 .bg-primary {
-    background-color: #1d76bb !important;
-}
-
-.btn-primary {
-    background-color: #1d76bb !important;
+    background-color: #1d76bb;
 }
 
 .text-warning {
-    color: #fbbe0a !important;
+    color: #fbbe0a;
 }
 
 .bg-warning {
-    background-color: #fbbe0a !important;
+    background-color: #fbbe0a;
 }
 
-.btn-warning {
-    background-color: #fbbe0a !important;
+.btn-negative {
+    color: #000000;
+    border-color: #e0e0e0;
+    background-color: #ffffff;
+}
+
+.btn-info{
+    border-color: #1d76bb;
+    background-color: #1d76bb;
 }
 
 .btn-toggle:focus {
     outline: none;
+}
+
+.text-alert-mes{
+    margin-top: 2px;
 }

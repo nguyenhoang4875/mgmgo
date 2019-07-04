@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Activity extends TableImpl<ActivityRecord> {
 
-    private static final long serialVersionUID = -1314987486;
+    private static final long serialVersionUID = -430578923;
 
     /**
      * The reference instance of <code>public.activity</code>
@@ -70,6 +70,16 @@ public class Activity extends TableImpl<ActivityRecord> {
      * The column <code>public.activity.description</code>.
      */
     public final TableField<ActivityRecord, String> DESCRIPTION = createField("description", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>public.activity.created_by_user_id</code>.
+     */
+    public final TableField<ActivityRecord, Long> CREATED_BY_USER_ID = createField("created_by_user_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>public.activity.updated_by_user_id</code>.
+     */
+    public final TableField<ActivityRecord, Long> UPDATED_BY_USER_ID = createField("updated_by_user_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
      * Create a <code>public.activity</code> table reference
@@ -142,6 +152,22 @@ public class Activity extends TableImpl<ActivityRecord> {
     @Override
     public List<UniqueKey<ActivityRecord>> getKeys() {
         return Arrays.<UniqueKey<ActivityRecord>>asList(Keys.PK_ACTIVITY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<ActivityRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<ActivityRecord, ?>>asList(Keys.ACTIVITY__FK_ACTIVITY_USER_CREATED_BY, Keys.ACTIVITY__FK_ACTIVITY_USER_UPDATED_BY);
+    }
+
+    public User activity_FkActivityUserCreatedBy() {
+        return new User(this, Keys.ACTIVITY__FK_ACTIVITY_USER_CREATED_BY);
+    }
+
+    public User activity_FkActivityUserUpdatedBy() {
+        return new User(this, Keys.ACTIVITY__FK_ACTIVITY_USER_UPDATED_BY);
     }
 
     /**

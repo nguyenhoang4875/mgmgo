@@ -12,24 +12,23 @@
     <div th:if="${error != null}">
         <div class="alert-danger alert" th:text="${error}"></div>
     </div>
+    <h3>Create new activity</h3>
     <div class="card text-left p-3">
-        <form method="post" th:action="@{/activity/update}" name="editForm" th:object="${activityInfo}" id="editForm">
+        <form method="post" action="/activity/create" name="createForm" th:object="${activityInfo}" id="createForm">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <input type="hidden" name="id" id="id" th:value="${activityInfo.getId()}">
             <div class="form-group">
                 <label for="title">Name</label>
-                <input type="text" class="form-control" id="title"
-                       th:value="${activityInfo.getName()}" th:field="*{name}">
+                <input type="text" name="name" class="form-control" id="title" th:value="${activityInfo.getName()}">
                 <div id="alertName" class="text-danger text-alert-mes"></div>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3" th:text="${activityInfo.description}"
-                          th:field="*{description}"></textarea>
+                <textarea class="form-control" name="description" id="description" rows="3"
+                          th:text="${activityInfo.description}"></textarea>
                 <div id="alertDes" class="text-danger text-alert-mes"></div>
             </div>
-            <button id="submitBtn" type="submit" class="btn btn-success">Ok</button>
-            <a th:href="@{/activity/{activityId}(activityId=${activityId})}" class="btn btn-negative">Cancel</a>
+            <button id="submitBtn" type="submit" class="btn btn-success">Create</button>
+            <a th:href="@{/}" class="btn btn-negative">Cancel</a>
         </form>
     </div>
 </div>
