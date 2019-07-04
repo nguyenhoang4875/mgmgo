@@ -52,4 +52,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
 
+
+    @Override
+    public List<ActivityDTO> search(String text) {
+        return activityRepository.search(text);
+    }
 }
