@@ -124,7 +124,7 @@ public class ActivityControllerTest {
     public void shouldShowMessageErrorIfUpdateExistName() {
         Mockito.when(userService.getCurrentUser()).thenReturn(EXPECTED_CUSTOM_USER_DETAIL);
         EXPECTED_ACTIVITY_DETAIL_DTO.setCreatedByUserId(EXPECTED_CUSTOM_USER_DETAIL.getId());
-        Mockito.when(activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
+        Mockito.when(activityService.checkExistNameForUpdate(EXPECTED_ACTIVITY_DETAIL_DTO.getId(), EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
 
         try {
             mockMvc.perform(post(UPDATE_URL)
