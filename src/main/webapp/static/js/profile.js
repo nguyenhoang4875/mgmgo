@@ -8,13 +8,12 @@ $(document).ready(function () {
 function handleTextInputChange(e) {
     var input = $(e.target);
     var errorBox = input.parent().find(".invalid-feedback");
-    if (input.val().length == 0 || input.val().length > 30) {
+    var value = input.val().replace(/\s+/g, ' ').trim();
+    if (value.length == 0 || value.length > 30) {
         input.addClass("is-invalid");
-        if (input.val().length == 0) errorBox.html("Please enter value in this field.")
-        else if (input.val().length > 30) errorBox.html("The text size can not be greater than 30");
-        $("#info-save-btn").attr("disabled", true);
+        if (value.length == 0) errorBox.html("Please enter value in this field.")
+        else if (value.length > 30) errorBox.html("The text size can not be greater than 30");
     } else {
-        $("#info-save-btn").attr("disabled", false);
         input.removeClass("is-invalid");
     }
 }
