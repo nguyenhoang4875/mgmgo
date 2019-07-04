@@ -47,11 +47,22 @@ public class ActivityRepository {
         return activity == null ? null : activity.into(ActivityDetailDTO.class);
     }
 
-    public int updateActivity(long activityId, String newName, String newDescription) {
+    public int update(ActivityDetailDTO activityDetailDTO) {
         return dslContext.update(ACTIVITY)
-                .set(ACTIVITY.NAME, newName)
-                .set(ACTIVITY.DESCRIPTION, newDescription)
-                .where(ACTIVITY.ID.eq(activityId)).execute();
+                .set(ACTIVITY.NAME, activityDetailDTO.getName())
+                .set(ACTIVITY.DESCRIPTION, activityDetailDTO.getDescription())
+                .set(ACTIVITY.UPDATED_BY_USER_ID, activityDetailDTO.getUpdatedByUserId())
+                .where(ACTIVITY.ID.eq(activityDetailDTO.getId())).execute();
     }
 
+    public int create(ActivityDetailDTO activityDetailDTO){
+        return dslContext.insertInto(ACTIVITY, ACTIVITY.NAME, ACTIVITY.DESCRIPTION, ACTIVITY.CREATED_BY_USER_ID, ACTIVITY.UPDATED_BY_USER_ID)
+                .values(activityDetailDTO.getName(),activityDetailDTO.getDescription(), activityDetailDTO.getCreatedByUserId(), activityDetailDTO.getCreatedByUserId())
+                .execute();
+    }
+
+    public boolean checkExistName(String activityName){
+        return dslContext.fetchExists(dslContext.selectFrom(ACTIVITY)
+                .where(ACTIVITY.NAME.likeIgnoreCase(activityName)));
+    }
 }

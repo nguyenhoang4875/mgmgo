@@ -18,8 +18,14 @@
             <column name="description" type="longvarchar">
                 <constraints nullable="false"/>
             </column>
-
+            <column name="created_by_user_id" type="bigint">
+                <constraints foreignKeyName="fk_activity_user_created_by" references="public.user(id)"/>
+            </column>
+            <column name="updated_by_user_id" type="bigint">
+                <constraints foreignKeyName="fk_activity_user_updated_by" references="public.user(id)"/>
+            </column>
         </createTable>
+
     </changeSet>
 
 </databaseChangeLog>
