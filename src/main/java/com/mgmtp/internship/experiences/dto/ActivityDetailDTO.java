@@ -12,7 +12,6 @@ import java.util.Objects;
  */
 public class ActivityDetailDTO {
 
-
     private long id;
 
     @NotNull(message = "Name may not be null")
@@ -20,15 +19,12 @@ public class ActivityDetailDTO {
     @Size(max = 100, message = "You can not write more than 100 characters for name")
     private String name;
 
-
     @NotNull(message = "Description may not be null")
     @NotBlank(message = "Description may not be blank")
     @Size(max = 100000, message = "You can not write more than 10000 characters for description")
     private String description;
+    private Long imageId;
     private double rating;
-
-
-
     private long createdByUserId;
     private long updatedByUserId;
 
@@ -36,10 +32,11 @@ public class ActivityDetailDTO {
 
     }
 
-    public ActivityDetailDTO(long id, String name, String description, double rating) {
+    public ActivityDetailDTO(long id, String name, String description, double rating, Long imageId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.imageId = imageId;
         this.rating = rating;
     }
 
@@ -65,6 +62,14 @@ public class ActivityDetailDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 
     public double getRating() {

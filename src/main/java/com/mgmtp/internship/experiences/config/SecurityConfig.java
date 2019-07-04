@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(characterEncodingFilter(), CsrfFilter.class).authorizeRequests()
-                .antMatchers("/activity/**")
+                .antMatchers("/activity/**", "/api/image/activity/**")
                 .authenticated()
                 .anyRequest()
                 .permitAll()
@@ -58,7 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/");
-
     }
 
     private CharacterEncodingFilter characterEncodingFilter(){

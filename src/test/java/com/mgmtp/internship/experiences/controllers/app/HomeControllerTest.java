@@ -34,7 +34,7 @@ public class HomeControllerTest {
     @Test
     public void shouldReturnModelHaveListActivity() {
         final Model model = new ExtendedModelMap();
-        List<ActivityDTO> expectedActivityDTO = Arrays.asList(new ActivityDTO(1, "abc"));
+        List<ActivityDTO> expectedActivityDTO = Arrays.asList(new ActivityDTO(1, "abc", 1L));
         Mockito.when(activityService.findAll()).thenReturn(expectedActivityDTO);
 
         String actualView = homeController.getHome(model);

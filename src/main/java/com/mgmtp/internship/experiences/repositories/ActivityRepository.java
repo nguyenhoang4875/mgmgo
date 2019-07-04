@@ -3,15 +3,16 @@ package com.mgmtp.internship.experiences.repositories;
 import com.mgmtp.internship.experiences.dto.ActivityDTO;
 import com.mgmtp.internship.experiences.dto.ActivityDetailDTO;
 import org.jooq.DSLContext;
-import org.jooq.Record4;
+import org.jooq.Record5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.mgmtp.internship.experiences.model.tables.tables.Activity.ACTIVITY;
+import static com.mgmtp.internship.experiences.model.tables.tables.ActivityImage.ACTIVITY_IMAGE;
+import static com.mgmtp.internship.experiences.model.tables.tables.Image.IMAGE;
 import static com.mgmtp.internship.experiences.model.tables.tables.Rating.RATING;
 import static org.jooq.impl.DSL.avg;
 import static org.jooq.impl.DSL.round;
@@ -28,22 +29,26 @@ public class ActivityRepository {
     private DSLContext dslContext;
 
     public List<ActivityDTO> findAll() {
-        return dslContext.selectFrom(ACTIVITY)
+        return dslContext.select(ACTIVITY.ID, ACTIVITY.NAME, IMAGE.ID.as("imageId"))
+                .from(ACTIVITY)
+                .leftJoin(ACTIVITY_IMAGE)
+                .on(ACTIVITY.ID.eq(ACTIVITY_IMAGE.ACTIVITY_ID))
+                .leftJoin(IMAGE).on(ACTIVITY_IMAGE.IMAGE_ID.eq(IMAGE.ID))
                 .orderBy(ACTIVITY.ID)
-                .fetch().stream()
-                .map(ActivityDTO::new)
-                .collect(Collectors.toList());
+                .fetchInto(ActivityDTO.class);
     }
 
     public ActivityDetailDTO findById(long activityId) {
-        Record4<Long, String, String, BigDecimal> activity = dslContext.select(ACTIVITY.ID,
-                ACTIVITY.NAME, ACTIVITY.DESCRIPTION, round(avg(RATING.VALUE), 1).as("rating"))
+        Record5<Long, String, String, BigDecimal, Long> activity = dslContext.select(ACTIVITY.ID,
+                ACTIVITY.NAME, ACTIVITY.DESCRIPTION, round(avg(RATING.VALUE), 1).as("rating"), IMAGE.ID.as("imageId"))
                 .from(ACTIVITY)
                 .leftJoin(RATING)
                 .on(ACTIVITY.ID.eq(RATING.ACTIVITY_ID))
+                .leftJoin(ACTIVITY_IMAGE)
+                .on(ACTIVITY.ID.eq(ACTIVITY_IMAGE.ACTIVITY_ID))
+                .leftJoin(IMAGE).on(ACTIVITY_IMAGE.IMAGE_ID.eq(IMAGE.ID))
                 .where(ACTIVITY.ID.eq(activityId))
-                .groupBy(ACTIVITY.ID).fetchOne();
-
+                .groupBy(ACTIVITY.ID, IMAGE.ID).fetchOne();
         return activity == null ? null : activity.into(ActivityDetailDTO.class);
     }
 
