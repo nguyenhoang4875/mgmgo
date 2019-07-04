@@ -20,6 +20,7 @@ public class StringReplaceWhitespaceEditor extends PropertyEditorSupport {
         this.emptyAsNull = emptyAsNull;
     }
 
+    @Override
     public void setAsText(@Nullable String text) {
         if (text == null) {
             this.setValue((Object) null);
