@@ -27,14 +27,15 @@ public class ImageRepository {
                 .where(IMAGE.ID.eq(imageId))
                 .fetchOne();
 
-        if (image == null)
+        if (image == null) {
             return null;
+        }
 
         return image.into(ImageDTO.class);
     }
 
     public Long insert(byte[] imageData) {
-        return dslContext.insertInto(IMAGE,IMAGE.IMAGE_DATA)
+        return dslContext.insertInto(IMAGE, IMAGE.IMAGE_DATA)
                 .values(imageData)
                 .returning(IMAGE.ID)
                 .fetchOne().getId();

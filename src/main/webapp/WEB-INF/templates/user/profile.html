@@ -36,7 +36,7 @@
                 <label class="col-12" for="displayName">Display name:</label>
                 <div class="col-12 px-0">
                     <input th:class="'form-control'+${#fields.hasErrors('displayName')?' is-invalid':''}" type="text"
-                           name="displayName" id="displayName" th:value="*{displayName!=null}?*{displayName}:${username}"
+                           name="displayName" id="displayName" th:value="*{displayName}"
                            maxlength="30" required>
                     <div class="invalid-feedback" th:if="${#fields.hasErrors('displayName')}"
                          th:errors="*{displayName}"></div>

@@ -59,9 +59,8 @@ public class ImageRestController extends BaseRestController {
         }
 
         CustomUserDetails userDetails = userService.getCurrentUser();
-        long imageId = 0;
         try {
-            imageId = imageService.updateUserImage(userDetails.getId(), imageData);
+            Long imageId = imageService.updateUserImage(userDetails.getId(), userDetails.getUserProfile().getImageId(), imageData);
             userDetails.getUserProfile().setImageId(imageId);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("id", imageId);

@@ -24,6 +24,9 @@ import java.util.Collections;
 public class ImageRestControllerTest {
 
     private static final MockMultipartFile FILE = new MockMultipartFile("photo", "test.jpg", "multipart/form-data", new byte[]{1});
+    private static final Long OLD_IMAGE_ID = 2L;
+    private static final UserProfileDTO USER_PROFILE_DTO = Mockito.spy(new UserProfileDTO(OLD_IMAGE_ID, "display"));
+    private static final CustomUserDetails USER_DETAILS = Mockito.spy(new CustomUserDetails(1L, USER_PROFILE_DTO, "username", "pass", Collections.emptyList()));
 
     private MockMvc mockMvc;
 
@@ -67,36 +70,35 @@ public class ImageRestControllerTest {
 
     @Test
     public void addUserImageShouldNotChangeIdIfUpdateFail() {
-        CustomUserDetails user = Mockito.spy(new CustomUserDetails(1L, new UserProfileDTO(1L, "display"), "username", "pass", Collections.emptyList()));
         try {
             Mockito.when(imageService.validateProfilePicture(Mockito.any())).thenReturn(true);
-            Mockito.when(userService.getCurrentUser()).thenReturn(user);
-            Mockito.when(imageService.updateUserImage(user.getId(), FILE.getBytes())).thenThrow(new RuntimeException());
+            Mockito.when(userService.getCurrentUser()).thenReturn(USER_DETAILS);
+            Mockito.when(imageService.updateUserImage(USER_DETAILS.getId(), OLD_IMAGE_ID, FILE.getBytes())).thenThrow(new RuntimeException());
 
             mockMvc.perform(MockMvcRequestBuilders.multipart("/api/image/user").file(FILE))
                     .andExpect(MockMvcResultMatchers.status().isBadRequest())
                     .andExpect(MockMvcResultMatchers.content().string("{\"status\":\"FAILED\",\"message\":\"Server error.\"}"));
 
-            Mockito.verify(user, Mockito.never()).getUserProfile().getImageId();
+            Mockito.verify(USER_PROFILE_DTO, Mockito.never()).setImageId(Mockito.anyLong());
         } catch (Exception e) {
         }
     }
 
     @Test
     public void addUserImageShouldChangeIdIfUpdateSucceed() {
-        CustomUserDetails user = Mockito.spy(new CustomUserDetails(1L, new UserProfileDTO(1L, "display"), "username", "pass", Collections.emptyList()));
+
         Long imageId = 1L;
         try {
 
             Mockito.when(imageService.validateProfilePicture(Mockito.any())).thenReturn(true);
-            Mockito.when(userService.getCurrentUser()).thenReturn(user);
-            Mockito.when(imageService.updateUserImage(user.getId(), FILE.getBytes())).thenReturn(imageId);
+            Mockito.when(userService.getCurrentUser()).thenReturn(USER_DETAILS);
+            Mockito.when(imageService.updateUserImage(USER_DETAILS.getId(), OLD_IMAGE_ID, FILE.getBytes())).thenReturn(imageId);
 
             mockMvc.perform(MockMvcRequestBuilders.multipart("/api/image/user").file(FILE))
                     .andExpect(MockMvcResultMatchers.status().isOk())
                     .andExpect(MockMvcResultMatchers.content().string("{\"id\":1}"));
 
-            Mockito.verify(user).getUserProfile().setImageId(imageId);
+            Mockito.verify(USER_PROFILE_DTO).setImageId(imageId);
         } catch (Exception e) {
         }
     }

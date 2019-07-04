@@ -14,7 +14,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="display_name" type="varchar(30)">
-                <constraints nullable="true" unique="true"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>

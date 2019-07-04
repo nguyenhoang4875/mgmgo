@@ -48,21 +48,20 @@ public class ImageServiceImplTest {
     @Test
     public void updateUserImageShouldReturnImageId() {
         Long expectedId = 1L;
+        Long oldImageId = 2L;
 
         Mockito.doReturn(expectedId).when(imageService).insertImage(IMAGE_DATA);
 
-        Long returnId = imageService.updateUserImage(USER_ID, IMAGE_DATA);
+        Long returnId = imageService.updateUserImage(USER_ID, oldImageId, IMAGE_DATA);
 
-        Assert.assertEquals(returnId, expectedId);
+        Assert.assertEquals(expectedId, returnId);
     }
 
     @Test
     public void updateUserImageShouldCallDeleteOldImageIfThereIs() {
         Long expectedId = 2L;
 
-        Mockito.when(userRepository.getImageId(USER_ID)).thenReturn(expectedId);
-
-        imageService.updateUserImage(USER_ID, IMAGE_DATA);
+        imageService.updateUserImage(USER_ID, expectedId, IMAGE_DATA);
 
         Mockito.verify(imageRepository).deleteImage(expectedId);
     }
@@ -71,9 +70,7 @@ public class ImageServiceImplTest {
     public void updateUserImageShouldNotCallDeleteOldImageIfNull() {
         Long expectedId = null;
 
-        Mockito.when(userRepository.getImageId(USER_ID)).thenReturn(expectedId);
-
-        imageService.updateUserImage(USER_ID, IMAGE_DATA);
+        imageService.updateUserImage(USER_ID, expectedId, IMAGE_DATA);
 
         Mockito.verify(imageRepository, Mockito.never()).deleteImage(expectedId);
     }
@@ -81,12 +78,13 @@ public class ImageServiceImplTest {
     @Test
     public void updateUserImageShouldCallSetImageId() {
         Long expectedId = 1L;
+        Long oldImageId = 2L;
 
         Mockito.doReturn(expectedId).when(imageService).insertImage(IMAGE_DATA);
 
-        imageService.updateUserImage(USER_ID, IMAGE_DATA);
+        imageService.updateUserImage(USER_ID, oldImageId, IMAGE_DATA);
 
-        Mockito.verify(userRepository).setImageId(USER_ID, expectedId);
+        Mockito.verify(userRepository).updateImage(USER_ID, expectedId);
     }
 
     @Test
@@ -95,7 +93,7 @@ public class ImageServiceImplTest {
 
         boolean result = imageService.validateProfilePicture(inputStream);
 
-        Assert.assertEquals(false, result);
+        Assert.assertFalse(result);
     }
 
     @Test

@@ -25,28 +25,21 @@ public class UserRepository {
                 .fetchOne();
     }
 
-    public boolean setImageId(long userId, Long imageId) {
+    public boolean updateImage(long userId, Long imageId) {
         return dslContext.update(USER)
-                .set(USER.IMAGE_ID,imageId)
+                .set(USER.IMAGE_ID, imageId)
                 .where(USER.ID.eq(userId))
                 .execute() == 1;
-    }
-
-    public Long getImageId(long id) {
-        return dslContext.select(USER.IMAGE_ID)
-                .from(USER)
-                .where(USER.ID.eq(id))
-                .fetchOne().get(USER.IMAGE_ID);
     }
 
     public boolean updateProfile(long userId, UserProfileDTO profile) {
         return dslContext.update(USER)
-                .set(USER.DISPLAY_NAME,profile.getDisplayName())
+                .set(USER.DISPLAY_NAME, profile.getDisplayName())
                 .where(USER.ID.eq(userId))
                 .execute() == 1;
     }
 
-    public boolean checkExitDisplayName(String displayName){
+    public boolean checkExitDisplayName(String displayName) {
         return dslContext.fetchExists(dslContext.selectFrom(USER)
                 .where(USER.DISPLAY_NAME.likeIgnoreCase(displayName)));
     }

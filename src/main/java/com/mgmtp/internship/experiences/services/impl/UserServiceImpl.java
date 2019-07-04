@@ -23,8 +23,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public CustomUserDetails getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null)
+        if (authentication == null) {
             return null;
+        }
         Object principal = authentication.getPrincipal();
         return (CustomUserDetails) principal;
     }
@@ -33,7 +34,9 @@ public class UserServiceImpl implements UserService {
     public boolean updateProfile(long userId, UserProfileDTO profile) {
         if (userRepository.updateProfile(userId, profile)) {
             CustomUserDetails currentUser = getCurrentUser();
-            if (currentUser == null) return false;
+            if (currentUser == null) {
+                return false;
+            }
             currentUser.getUserProfile().setDisplayName(profile.getDisplayName());
             return true;
         }

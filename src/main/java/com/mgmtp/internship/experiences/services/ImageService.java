@@ -16,10 +16,10 @@ public interface ImageService {
 
     ImageDTO findImageById(long imageId);
 
-    long insertImage(byte[] imageData);
+    Long insertImage(byte[] imageData);
 
     @Transactional
-    long updateUserImage(long userId, byte[] data);
+    Long updateUserImage(long userId, Long oldImageId, byte[] data);
 
     boolean validateProfilePicture(InputStream inputStream) throws IOException;
 }
