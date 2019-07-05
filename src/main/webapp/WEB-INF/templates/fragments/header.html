@@ -21,7 +21,7 @@
                         <div class="nav-link dropdown" sec:authorize="isAuthenticated()">
                             <a class="dropdown-toggle" id="user_dropdown" data-toggle="dropdown"
                                href="#">
-                                <img id="user-thumbnail" class="rounded img-thumbnail" width="35" height="35"
+                                <img id="user-thumbnail" class="img-thumbnail" width="35" height="35"
                                      th:src="${#authentication.principal.userProfile.imageId!=null}?@{/api/image/}+${#authentication.principal.userProfile.imageId}:@{/static/images/default_profile_picture.png}"
                                      th:alt="${#authentication.principal.userProfile.displayName}">
 

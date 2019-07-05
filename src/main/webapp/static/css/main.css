@@ -107,3 +107,8 @@ body {
 .text-alert-mes{
     margin-top: 2px;
 }
+
+#user-thumbnail {
+    padding: 0px;
+    border-radius: 50%;
+}

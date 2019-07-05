@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    window.EXIF = EXIF;
     init();
     $("input.form-control").on('input',handleTextInputChange);
     $("#file-input").change(handleFileChange);
@@ -69,6 +70,7 @@ function init() {
 
 function initCroppie() {
     $("#crop-container").croppie({
+        enableExif: true,
         viewport: {
             width: 150,
             height: 150,
