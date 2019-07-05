@@ -1,6 +1,7 @@
 package com.mgmtp.internship.experiences.repositories;
 
 import com.mgmtp.internship.experiences.dto.ImageDTO;
+import com.mgmtp.internship.experiences.model.tables.tables.records.ImageRecord;
 import org.jooq.DSLContext;
 import org.jooq.Record2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,14 @@ public class ImageRepository {
     DSLContext dslContext;
 
     public ImageDTO findImageById(long imageId) {
-        Record2<Long, byte[]> image = dslContext
+        ImageRecord image = dslContext
                 .selectFrom(IMAGE)
                 .where(IMAGE.ID.eq(imageId))
                 .fetchOne();
 
-        if (image == null)
+        if (image == null) {
             return null;
+        }
 
         return image.into(ImageDTO.class);
     }
@@ -63,10 +65,16 @@ public class ImageRepository {
         }
     }
 
-    private long insert(byte[] imageData) {
+    public Long insert(byte[] imageData) {
         return dslContext.insertInto(IMAGE, IMAGE.IMAGE_DATA)
                 .values(imageData)
                 .returning(IMAGE.ID)
-                .fetchOne().getValue(IMAGE.ID);
+                .fetchOne().getId();
+    }
+
+    public int deleteImage(Long oldImageId) {
+        return dslContext.deleteFrom(IMAGE)
+                .where(IMAGE.ID.eq(oldImageId))
+                .execute();
     }
 }

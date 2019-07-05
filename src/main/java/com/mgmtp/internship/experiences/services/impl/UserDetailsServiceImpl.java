@@ -1,6 +1,7 @@
 package com.mgmtp.internship.experiences.services.impl;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
+import com.mgmtp.internship.experiences.dto.UserProfileDTO;
 import com.mgmtp.internship.experiences.model.tables.tables.records.UserRecord;
 import com.mgmtp.internship.experiences.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userRecord == null) {
             throw new UsernameNotFoundException("username not found in database!");
         }
-        return new CustomUserDetails(userRecord.getId(), userRecord.getUsername(), userRecord.getPassword(), Collections.emptyList());
+        return new CustomUserDetails(userRecord.getId(), new UserProfileDTO(userRecord.getImageId(), userRecord.getDisplayName()), userRecord.getUsername(), userRecord.getPassword(), Collections.emptyList());
     }
 }

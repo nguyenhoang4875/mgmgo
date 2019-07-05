@@ -13,7 +13,6 @@ public class ImageDTO {
     public ImageDTO(long id, byte[] image) {
         this.id = id;
         this.image = image;
-
     }
 
     public long getId() {

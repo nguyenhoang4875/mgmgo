@@ -2,6 +2,7 @@ package com.mgmtp.internship.experiences.controllers.app;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
 import com.mgmtp.internship.experiences.dto.ActivityDetailDTO;
+import com.mgmtp.internship.experiences.dto.UserProfileDTO;
 import com.mgmtp.internship.experiences.services.ActivityService;
 import com.mgmtp.internship.experiences.services.UserService;
 import org.junit.Before;
@@ -40,7 +41,7 @@ public class ActivityControllerTest {
     private static final String UPDATE_URL = "/activity/update";
     private static final String CREATE_URL = "/activity/create";
     private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "name", "des", 5, 1L);
-    private static final CustomUserDetails EXPECTED_CUSTOM_USER_DETAIL = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
+    private static final CustomUserDetails EXPECTED_CUSTOM_USER_DETAIL = new CustomUserDetails(1L, new UserProfileDTO(1L, "display"), "username", "pass", Collections.emptyList());
 
     private MockMvc mockMvc;
 

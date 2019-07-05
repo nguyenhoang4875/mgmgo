@@ -37,6 +37,7 @@ public class Indexes {
     public static final Index PK_IMAGE = Indexes0.PK_IMAGE;
     public static final Index PK_RATING = Indexes0.PK_RATING;
     public static final Index PK_USER = Indexes0.PK_USER;
+    public static final Index USER_DISPLAY_NAME_KEY = Indexes0.USER_DISPLAY_NAME_KEY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -47,5 +48,6 @@ public class Indexes {
         public static Index PK_IMAGE = Internal.createIndex("pk_image", Image.IMAGE, new OrderField[] { Image.IMAGE.ID }, true);
         public static Index PK_RATING = Internal.createIndex("pk_rating", Rating.RATING, new OrderField[] { Rating.RATING.ID }, true);
         public static Index PK_USER = Internal.createIndex("pk_user", User.USER, new OrderField[] { User.USER.ID }, true);
+        public static Index USER_DISPLAY_NAME_KEY = Internal.createIndex("user_display_name_key", User.USER, new OrderField[]{User.USER.DISPLAY_NAME}, true);
     }
 }

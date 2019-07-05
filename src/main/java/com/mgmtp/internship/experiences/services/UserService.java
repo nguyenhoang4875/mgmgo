@@ -1,6 +1,8 @@
 package com.mgmtp.internship.experiences.services;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
+import com.mgmtp.internship.experiences.dto.UserProfileDTO;
+
 /**
  * User service interface.
  *
@@ -8,4 +10,8 @@ import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
  */
 public interface UserService {
     CustomUserDetails getCurrentUser();
+
+    boolean updateProfile(long userId, UserProfileDTO profile);
+
+    boolean checkExitDisplayName(String displayName, long id);
 }

@@ -25,7 +25,7 @@
                     <div class="modal-body">
                         <input id="activity-id" type="text" th:value="${activityInfo.getId()}" hidden/>
                         <div id="image-error" class="alert alert-danger d-none"></div>
-                        <div id="image-preview-container" class="container">
+                        <div id="image-preview-container">
                             <div class="image-wrapper">
                                 <img id="image"
                                      th:src="${activityInfo.imageId!=null}?@{/api/image/}+${activityInfo.imageId}:@{/static/images/no-img.png}"
