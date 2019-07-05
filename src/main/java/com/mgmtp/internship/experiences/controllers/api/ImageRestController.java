@@ -71,6 +71,8 @@ public class ImageRestController extends BaseRestController {
         } catch (RuntimeException e) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Server error.");
         }
+    }
+
     @PostMapping("/activity/{activity_id}")
     @ResponseBody
     public Object addImage(@PathVariable("activity_id") long activityId, @RequestParam("image_file") MultipartFile photo) throws IOException, ApiException {

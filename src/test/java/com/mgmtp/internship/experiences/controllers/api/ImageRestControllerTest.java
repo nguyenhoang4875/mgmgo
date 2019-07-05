@@ -1,9 +1,13 @@
 package com.mgmtp.internship.experiences.controllers.api;
 
 import com.mgmtp.internship.experiences.config.security.CustomUserDetails;
+import com.mgmtp.internship.experiences.dto.ImageDTO;
 import com.mgmtp.internship.experiences.dto.UserProfileDTO;
+import com.mgmtp.internship.experiences.exceptions.ApiException;
 import com.mgmtp.internship.experiences.services.ImageService;
 import com.mgmtp.internship.experiences.services.UserService;
+import com.mgmtp.internship.experiences.services.impl.ImageServiceImpl;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -103,8 +107,6 @@ public class ImageRestControllerTest {
         }
     }
 
-
-}
     @Test
     public void shouldReturnImageById() {
         long imageId = 1;
