@@ -31,7 +31,7 @@ public class ImageRestControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private ImageService imageService;
+    private ImageServiceImpl imageService;
 
     @Mock
     private UserService userService;
@@ -103,5 +103,32 @@ public class ImageRestControllerTest {
         }
     }
 
+
+}
+    @Test
+    public void shouldReturnImageById() {
+        long imageId = 1;
+        ImageDTO expectedImageDTO = new ImageDTO(imageId, new byte[]{(byte) 0xd4, 0x4f});
+        Mockito.when(imageService.findImageById(imageId)).thenReturn(expectedImageDTO);
+
+        byte[] actualImage = imageRestController.getImageById(imageId).getBody();
+
+        Assert.assertEquals(actualImage, expectedImageDTO.getImage());
+    }
+
+    @Test(expected = ApiException.class)
+    public void shouldThrowNotFoundExceptionIfReturnNullImage() {
+        long imageId = 1;
+        Mockito.when(imageService.findImageById(imageId)).thenReturn(null);
+        imageRestController.getImageById(imageId).getBody();
+    }
+
+    @Test(expected = ApiException.class)
+    public void shouldThrowApiExceptionIfAddImageFailed() throws IOException {
+        long activityId = 1;
+        MockMultipartFile photo = new MockMultipartFile("data", "data.jpg", "image/jpg", new byte[]{0x4f, 0x3f});
+        Mockito.when(imageService.updateActivityImage(activityId, photo.getBytes())).thenReturn(null);
+        imageRestController.addImage(activityId, photo);
+    }
 
 }

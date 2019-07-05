@@ -78,7 +78,7 @@ public class ActivityController {
         try {
             CustomUserDetails user = userService.getCurrentUser();
             activityDetailDTO.setUpdatedByUserId(user.getId());
-            if (activityService.checkExistName(activityDetailDTO.getName())) {
+            if (activityService.checkExistNameForUpdate(activityDetailDTO.getId(), activityDetailDTO.getName())) {
                 redirectAttributes.addFlashAttribute(ERROR_VIEW, "This name already exists");
                 redirectAttributes.addFlashAttribute(ACTIVITY_INFO_ATTRIBUTE, activityDetailDTO);
                 return REDIRECT_UPDATE_URL + activityDetailDTO.getId();

@@ -20,4 +20,8 @@ public interface ActivityService {
     int create(ActivityDetailDTO activityDetailDTO);
 
     boolean checkExistName(String activityName);
+
+    boolean checkExistNameForUpdate(long activityId, String activityName);
+
+    List<ActivityDTO> search(String text);
 }

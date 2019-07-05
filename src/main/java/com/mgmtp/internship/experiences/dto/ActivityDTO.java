@@ -1,7 +1,5 @@
 package com.mgmtp.internship.experiences.dto;
 
-import com.mgmtp.internship.experiences.model.tables.tables.records.ActivityRecord;
-
 /**
  * Activity DTO.
  *
@@ -10,18 +8,15 @@ import com.mgmtp.internship.experiences.model.tables.tables.records.ActivityReco
 public class ActivityDTO {
     private long id;
     private String name;
+    private Long imageId;
 
     public ActivityDTO() {
     }
 
-    public ActivityDTO(long id, String name) {
+    public ActivityDTO(long id, String name, Long imageId) {
         this.id = id;
         this.name = name;
-    }
-
-    public ActivityDTO(ActivityRecord activityRecord) {
-        this.id = activityRecord.getId();
-        this.name = activityRecord.getName();
+        this.imageId = imageId;
     }
 
     public long getId() {
@@ -38,5 +33,13 @@ public class ActivityDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Long imageId) {
+        this.imageId = imageId;
     }
 }

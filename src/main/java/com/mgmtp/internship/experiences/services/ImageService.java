@@ -22,4 +22,6 @@ public interface ImageService {
     Long updateUserImage(long userId, Long oldImageId, byte[] data);
 
     boolean validateProfilePicture(InputStream inputStream) throws IOException;
+
+    Long updateActivityImage(long activityId, byte[] imageData);
 }

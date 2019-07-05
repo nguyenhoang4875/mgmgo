@@ -34,6 +34,9 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.findImageById(imageId);
     }
 
+    @Override
+    public Long updateActivityImage(long activityId, byte[] imageData) {
+        return imageRepository.updateActivityImage(activityId, imageData);
     public Long insertImage(byte[] imageData) {
         return imageRepository.insert(imageData);
     }

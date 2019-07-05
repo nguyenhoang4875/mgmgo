@@ -40,8 +40,8 @@ public class ActivityControllerTest {
     private static final String ERROR_ATTRIBUTE = "error";
     private static final String UPDATE_URL = "/activity/update";
     private static final String CREATE_URL = "/activity/create";
-    private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "name", "des", 5);
-    private static final CustomUserDetails EXPECTED_CUSTOM_USER_DETAIL = new CustomUserDetails(1L, new UserProfileDTO(1L, "display"), "username", "pass", Collections.emptyList());
+    private static final ActivityDetailDTO EXPECTED_ACTIVITY_DETAIL_DTO = new ActivityDetailDTO(ACTIVITY_ID, "name", "des", 1L);
+    private static final CustomUserDetails EXPECTED_CUSTOM_USER_DETAIL = new CustomUserDetails(1L, USERNAME, "pass", Collections.emptyList());
 
     private MockMvc mockMvc;
 
@@ -125,7 +125,7 @@ public class ActivityControllerTest {
     public void shouldShowMessageErrorIfUpdateExistName() {
         Mockito.when(userService.getCurrentUser()).thenReturn(EXPECTED_CUSTOM_USER_DETAIL);
         EXPECTED_ACTIVITY_DETAIL_DTO.setCreatedByUserId(EXPECTED_CUSTOM_USER_DETAIL.getId());
-        Mockito.when(activityService.checkExistName(EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
+        Mockito.when(activityService.checkExistNameForUpdate(EXPECTED_ACTIVITY_DETAIL_DTO.getId(), EXPECTED_ACTIVITY_DETAIL_DTO.getName())).thenReturn(true);
 
         try {
             mockMvc.perform(post(UPDATE_URL)

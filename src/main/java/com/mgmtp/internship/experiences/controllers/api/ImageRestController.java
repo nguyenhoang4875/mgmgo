@@ -17,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
 
 /**
  * Quote api controller.
@@ -39,7 +42,7 @@ public class ImageRestController extends BaseRestController {
         ImageDTO imageDTO = imageService.findImageById(id);
 
         if (imageDTO == null) {
-            throw new ApiException(HttpStatus.NOT_FOUND, "Image not found.");
+            throw new ApiException(NOT_FOUND, "Image not found.");
         }
 
         return ResponseEntity.ok()
@@ -68,6 +71,18 @@ public class ImageRestController extends BaseRestController {
         } catch (RuntimeException e) {
             throw new ApiException(HttpStatus.BAD_REQUEST, "Server error.");
         }
+    @PostMapping("/activity/{activity_id}")
+    @ResponseBody
+    public Object addImage(@PathVariable("activity_id") long activityId, @RequestParam("image_file") MultipartFile photo) throws IOException, ApiException {
+        byte[] imageData = photo.getBytes();
+        Long imageId = imageService.updateActivityImage(activityId, imageData);
+        if (imageId == null) {
+            throw new ApiException(BAD_REQUEST, "Server error.");
+        }
+        JSONObject jsonObject = new JSONObject();
+        String url = "api/image/" + imageId;
+        jsonObject.put("imageFromRestAPI", url);
+        return jsonObject;
     }
 
 

@@ -8,6 +8,8 @@
     <include file="R1.0/create_image_table.xml" relativeToChangelogFile="true"/>
     <include file="R1.0/create_user_table.xml" relativeToChangelogFile="true"/>
     <include file="R1.0/create_activity_table.xml" relativeToChangelogFile="true"/>
+    <include file="R1.0/create_image_table.xml" relativeToChangelogFile="true"/>
+    <include file="R1.0/create_activity_image_table.xml" relativeToChangelogFile="true"/>
     <include file="R1.0/create_rating_table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
